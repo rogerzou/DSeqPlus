@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.sav
+*.png
+.DS_Store
+.idea/
+
+!lib/*
+lib/.DS_Store
