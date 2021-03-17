@@ -3,14 +3,14 @@
 ########### USER ENTRY SECTION ###########
 # Enter paths to all samples for processing into this array
 declare -a filelist=(\
-  "/mnt/d/210301_chipseq/A13" \
-  "/mnt/d/210301_chipseq/A14" \
-  "/mnt/d/210301_chipseq/A15" \
-  "/mnt/d/210301_chipseq/A16" \
-  "/mnt/d/210301_chipseq/A17" \
-  "/mnt/d/210301_chipseq/A18" \
-  "/mnt/d/210301_chipseq/A19" \
-  "/mnt/d/210301_chipseq/A20" \
+  "/mnt/d/210301_Dseq+/A13_sub" \
+  "/mnt/d/210301_Dseq+/A14_sub" \
+  "/mnt/d/210301_Dseq+/A15_sub" \
+  "/mnt/d/210301_Dseq+/A16_sub" \
+  "/mnt/d/210301_Dseq+/A17_sub" \
+  "/mnt/d/210301_Dseq+/A18_sub" \
+  "/mnt/d/210301_Dseq+/A19_sub" \
+  "/mnt/d/210301_Dseq+/A20_sub" \
 )
 
 # Enter path to indexed genome
