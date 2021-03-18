@@ -3,14 +3,25 @@
 ########### USER ENTRY SECTION ###########
 # Enter paths to all samples for processing into this array
 declare -a filelist=(\
-  "/mnt/d/210301_Dseq+/A13_sub" \
-  "/mnt/d/210301_Dseq+/A14_sub" \
-  "/mnt/d/210301_Dseq+/A15_sub" \
-  "/mnt/d/210301_Dseq+/A16_sub" \
-  "/mnt/d/210301_Dseq+/A17_sub" \
-  "/mnt/d/210301_Dseq+/A18_sub" \
-  "/mnt/d/210301_Dseq+/A19_sub" \
-  "/mnt/d/210301_Dseq+/A20_sub" \
+#  "/mnt/d/210216_Dseq+/A04_sub" \
+#  "/mnt/d/210216_Dseq+/A05_sub" \
+#  "/mnt/d/210216_Dseq+/A06_sub" \
+#  "/mnt/d/210216_Dseq+/A10_sub" \
+#  "/mnt/d/210216_Dseq+/A11_sub" \
+#  "/mnt/d/210216_Dseq+/A12_sub" \
+#  "/mnt/d/210216_Dseq+/A13_sub" \
+#  "/mnt/d/210216_Dseq+/A14_sub" \
+#  "/mnt/d/210216_Dseq+/A15_sub" \
+#  "/mnt/d/210216_Dseq+/A17_sub" \
+#  "/mnt/d/210216_Dseq+/A20_sub" \
+#  "/mnt/d/210301_Dseq+/A13_sub" \
+#  "/mnt/d/210301_Dseq+/A14_sub" \
+#  "/mnt/d/210301_Dseq+/A15_sub" \
+#  "/mnt/d/210301_Dseq+/A16_sub" \
+#  "/mnt/d/210301_Dseq+/A17_sub" \
+#  "/mnt/d/210301_Dseq+/A18_sub" \
+#  "/mnt/d/210301_Dseq+/A19" \
+#  "/mnt/d/210301_Dseq+/A20" \
 )
 
 # Enter path to indexed genome

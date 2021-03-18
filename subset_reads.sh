@@ -2,18 +2,37 @@
 
 ########### USER ENTRY SECTION ###########
 # Enter paths to all samples for processing into this array
-declare -a filelist1=(\
-  "/mnt/d/210301_Dseq+/A13" \
-  "/mnt/d/210301_Dseq+/A14" \
-)
-declare -a filelist2=(\
-  "/mnt/d/210301_Dseq+/A15" \
-  "/mnt/d/210301_Dseq+/A16" \
-)
-declare -a filelist3=(\
-  "/mnt/d/210301_Dseq+/A17" \
-  "/mnt/d/210301_Dseq+/A18" \
-)
+
+#declare -a filelist1=(\
+#  "/mnt/d/210216_Dseq+/A04" \
+#  "/mnt/d/210216_Dseq+/A05" \
+#  "/mnt/d/210216_Dseq+/A06" \
+#)
+#declare -a filelist2=(\
+#  "/mnt/d/210216_Dseq+/A10" \
+#  "/mnt/d/210216_Dseq+/A11" \
+#  "/mnt/d/210216_Dseq+/A12" \
+#  "/mnt/d/210216_Dseq+/A13" \
+#  "/mnt/d/210216_Dseq+/A14" \
+#  "/mnt/d/210216_Dseq+/A15" \
+#)
+#declare -a filelist3=(\
+#  "/mnt/d/210216_Dseq+/A17" \
+#  "/mnt/d/210216_Dseq+/A20" \
+#)
+
+#declare -a filelist1=(\
+#  "/mnt/d/210301_Dseq+/A13" \
+#  "/mnt/d/210301_Dseq+/A14" \
+#)
+#declare -a filelist2=(\
+#  "/mnt/d/210301_Dseq+/A15" \
+#  "/mnt/d/210301_Dseq+/A16" \
+#)
+#declare -a filelist3=(\
+#  "/mnt/d/210301_Dseq+/A17" \
+#  "/mnt/d/210301_Dseq+/A18" \
+#)
 
 ##########################################
 
@@ -30,8 +49,6 @@ subsetfastq() {
 
   # calculate the mininum number of lines in a FASTQ file for one set of files
   echo "Number of fastq files: $#"
-  echo $1
-  echo $2
   numlines=1000000000
   for var in "$@"
   do
