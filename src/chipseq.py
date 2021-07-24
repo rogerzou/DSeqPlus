@@ -559,3 +559,51 @@ def read_counts(generator, filein, fileout=None):
         header = 'region_string, cut site, sense, guide, mismatches, counts_RPM'
         np.savetxt(fileout, list_stat, fmt='%s', delimiter=',', header=header)
     return list_stat
+
+
+def save_subtract(gen, fileout):
+    """
+    :param gen: generator that outputs target sites in the following tuple format:
+                ( span_rs   =   region string in "chr1:100-200" format, centered at cut site
+                  cut_i     =   cut site                 (int)
+                  sen_i     =   sense/antisense          (+/- str)
+                  pam_i     =   PAM                      (str)
+                  gui_i     =   genomic target sequence  (str)
+                  mis_i     =   # mismatches             (int)
+                  guide     =   intended target sequence (str)
+    :param fileout: path to CSV output, extension omitted.
+    """
+    outa = []
+    for g in gen:
+        outa.append(g)
+    head = 'region string, cut, sense, PAM, actual sequence, # mismatches, intended sequence'
+    np.savetxt(fileout + "_setsubtract.csv", np.asarray(outa), fmt='%s', delimiter=',', header=head)
+
+
+def gen_subtract(gen1, gen2):
+    """ Outputs generator for set of target sites from gen1, subtracted by gen2.
+    :param gen1: generator that outputs target sites in the following tuple format:
+                ( span_rs   =   region string in "chr1:100-200" format, centered at cut site
+                  cut_i     =   cut site                 (int)
+                  sen_i     =   sense/antisense          (+/- str)
+                  pam_i     =   PAM                      (str)
+                  gui_i     =   genomic target sequence  (str)
+                  mis_i     =   # mismatches             (int)
+                  guide     =   intended target sequence (str)
+    :param gen2: same format as gen1
+    param outfile: path to output in csv. Default is no output.
+    :return: generator for set of target sites from gen1, subtracted by gen2
+    """
+    gen2list = []
+    count2, count1, countdiff = 0, 0, 0
+    for g in gen2:
+        cutloc_i = (re.split('[:-]', g[0])[0], g[1])
+        gen2list.append(cutloc_i)
+        count2 += 1
+    for g in gen1:
+        cutloc_i = (re.split('[:-]', g[0])[0], g[1])
+        count1 += 1
+        if cutloc_i not in gen2list:
+            countdiff += 1
+            yield g
+    print("# of target sites | gen1: %i | gen2: %i | gen1-gen2: %i" % (count1, count2, countdiff))
