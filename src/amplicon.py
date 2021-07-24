@@ -33,12 +33,12 @@ def getIndels(f_fastq, ref, target, outpath, stats=False, maxcount=False):
     locus = ""
     for key in ref.keys():
         seq_i = key.split('_')[2]
-        if seq_i == target or c.get_reverse_complement(seq_i) == target:
+        if seq_i == target or seq_i == c.get_reverse_complement(target):
             locus = key
             break
     exp_seq = list(SeqIO.parse(f_fastq, "fastq"))
     ref_seq = ref[locus].seq.upper()
-    ind = ref_seq.find(target)
+    ind = max(ref_seq.find(target), ref_seq.find(c.get_reverse_complement(target)))
     f_ind = max(0, ind - 40)
     r_ind = ind + 40
     fwd = ref_seq[f_ind:f_ind + 20]
