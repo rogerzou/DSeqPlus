@@ -89,6 +89,23 @@ c.read_subsets(c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2),
 
 
 """ ############################################################################################ """
+""" For all on- and off-target sites from BLENDER, determine paired-end read subsets at a location
+    10kb away (to show that DNA-PKcs inhibition does not globally increase background). """
+c.read_subsets(c.shift_gen(c.blender_gen(iPSC_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2)),
+               iPSC_Vs2_nD_r1_bam, ana_1 + "Shift_iPSC_Vs2_nD_r1_c2")
+c.read_subsets(c.shift_gen(c.blender_gen(iPSC_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2)),
+               iPSC_Vs2_KU_r1_bam, ana_1 + "Shift_iPSC_Vs2_KU_r1_c2")
+c.read_subsets(c.shift_gen(c.blender_gen(K562_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2)),
+               K562_Vs2_nD_r1_bam, ana_1 + "Shift_K562_Vs2_nD_r1_c2")
+c.read_subsets(c.shift_gen(c.blender_gen(K562_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2)),
+               K562_Vs2_KU_r1_bam, ana_1 + "Shift_K562_Vs2_KU_r1_c2")
+c.read_subsets(c.shift_gen(c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2)),
+               K562_Fs2_nD_r1_bam, ana_1 + "Shift_K562_Fs2_nD_r1_c2")
+c.read_subsets(c.shift_gen(c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2)),
+               K562_Fs2_KU_r1_bam, ana_1 + "Shift_K562_Fs2_KU_r1_c2")
+
+
+""" ############################################################################################ """
 """  """
 c.peak_profile_bp_resolution(c.blender_gen(iPSC_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2),
                              iPSC_Vs2_nD_r1_bam, ana_2 + "iPSC_Vs2_nD_r1_c2")

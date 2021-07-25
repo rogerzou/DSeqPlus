@@ -151,6 +151,26 @@ def mismatch_filter_gen(generator, mismatch):
             yield rs, cut, sen, pam, gui, mis, tar
 
 
+def shift_gen(generator, dist=10000):
+    """ Shift the coordinate position of input generator by bp distance 'dist'.
+    :param generator: generator that outputs target sites in the following tuple format:
+                ( span_rs   =   region string in "chr1:100-200" format, centered at cut site
+                  cut_i     =   cut site                 (int)
+                  sen_i     =   sense/antisense          (+/- str)
+                  pam_i     =   PAM                      (str)
+                  gui_i     =   genomic target sequence  (str)
+                  mis_i     =   # mismatches             (int)
+                  guide     =   intended target sequence (str)
+    :param dist: distance away from original position to shift
+    :return: generator with each position shifted by dist
+    """
+    for rs, cut, sen, pam, gui, mis, guide in generator:
+        rs_spt = re.split('[:-]', rs)
+        chr_i, lt_i, rt_i = rs_spt[0], int(rs_spt[1]) + dist, int(rs_spt[2]) + dist
+        cut += dist
+        yield "%s:%i-%i" % (chr_i, lt_i, rt_i), cut, sen, pam, gui, mis, guide
+
+
 def blender_gen(blender, span_r, genome, guide):
     """ Generator to yield all peaks from BLENDER output.
 
