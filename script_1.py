@@ -47,7 +47,9 @@ K562_Vs2_KU_r1_c2_txt = datadir + "Dseq+/K562_Vs2_KU_r1_c2/filtered_blender_hits
 K562_Fs2_nD_r1_c2_txt = datadir + "Dseq+/K562_Fs2_nD_r1_c2/filtered_blender_hits.txt"
 K562_Fs2_KU_r1_c2_txt = datadir + "Dseq+/K562_Fs2_KU_r1_c2/filtered_blender_hits.txt"
 
-ampngs = datadir + "210720_ampNGS/"
+ampngs1 = datadir + "210720_ampNGS/"
+ampngs2 = datadir + "210912_ampNGS/"
+ampngs3 = datadir + "210912_ampNGS/"
 
 """ gRNA sequences """
 gRNA_Vs2 = "GACCCCCTCCACCCCGCCTC"
@@ -106,7 +108,7 @@ c.read_subsets(c.shift_gen(c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA
 
 
 """ ############################################################################################ """
-"""  """
+""" Determine peak profiles at all discovered target sites. """
 c.peak_profile_bp_resolution(c.blender_gen(iPSC_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2),
                              iPSC_Vs2_nD_r1_bam, ana_2 + "iPSC_Vs2_nD_r1_c2")
 c.peak_profile_bp_resolution(c.blender_gen(iPSC_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2),
@@ -126,13 +128,13 @@ c.peak_profile_bp_resolution(c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gR
 
 
 def makegen_k562_fs2():
-    return c.gen_subtract(c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2),
-                          c.blender_gen(K562_Fs2_nD_r1_c2_txt, 2000, hg19, gRNA_Fs2))
+    return c.gen_subtract_exact(c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2),
+                                c.blender_gen(K562_Fs2_nD_r1_c2_txt, 2000, hg19, gRNA_Fs2))
 
 
 def makegen_k562_vs2():
-    return c.gen_subtract(c.blender_gen(K562_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2),
-                          c.blender_gen(K562_Vs2_nD_r1_c2_txt, 2000, hg19, gRNA_Vs2))
+    return c.gen_subtract_exact(c.blender_gen(K562_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2),
+                                c.blender_gen(K562_Vs2_nD_r1_c2_txt, 2000, hg19, gRNA_Vs2))
 
 
 # FANCFs2 KU60648 - no drug
@@ -146,67 +148,162 @@ c.peak_profile_bp_resolution(makegen_k562_vs2(), K562_Vs2_nD_r1_bam, ana_3 + "K5
 
 
 # FANCFs2 no drug - KU60648
-gen = c.gen_subtract(c.blender_gen(K562_Fs2_nD_r1_c2_txt, 2000, hg19, gRNA_Fs2),
-                     c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2))
+gen = c.gen_subtract_exact(c.blender_gen(K562_Fs2_nD_r1_c2_txt, 2000, hg19, gRNA_Fs2),
+                           c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2))
 [g[0] for g in gen]
-gen = c.gen_subtract(c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2),
-                     c.blender_gen(K562_Fs2_nD_r1_c2_txt, 2000, hg19, gRNA_Fs2))
+gen = c.gen_subtract_exact(c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2),
+                           c.blender_gen(K562_Fs2_nD_r1_c2_txt, 2000, hg19, gRNA_Fs2))
+[g[0] for g in gen]
+gen = c.gen_subtract_approx(c.blender_gen(K562_Fs2_nD_r1_c2_txt, 2000, hg19, gRNA_Fs2),
+                            c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2))
+[g[0] for g in gen]
+gen = c.gen_subtract_approx(c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2),
+                            c.blender_gen(K562_Fs2_nD_r1_c2_txt, 2000, hg19, gRNA_Fs2))
 [g[0] for g in gen]
 
 # VEGFAs2 no drug - KU60648
-gen = c.gen_subtract(c.blender_gen(K562_Vs2_nD_r1_c2_txt, 2000, hg19, gRNA_Vs2),
-                     c.blender_gen(K562_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2))
+gen = c.gen_subtract_exact(c.blender_gen(K562_Vs2_nD_r1_c2_txt, 2000, hg19, gRNA_Vs2),
+                           c.blender_gen(K562_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2))
 [g[0] for g in gen]
-gen = c.gen_subtract(c.blender_gen(K562_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2),
-                     c.blender_gen(K562_Vs2_nD_r1_c2_txt, 2000, hg19, gRNA_Vs2))
+gen = c.gen_subtract_exact(c.blender_gen(K562_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2),
+                           c.blender_gen(K562_Vs2_nD_r1_c2_txt, 2000, hg19, gRNA_Vs2))
+[g[0] for g in gen]
+gen = c.gen_subtract_approx(c.blender_gen(K562_Vs2_nD_r1_c2_txt, 2000, hg19, gRNA_Vs2),
+                            c.blender_gen(K562_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2))
+[g[0] for g in gen]
+gen = c.gen_subtract_approx(c.blender_gen(K562_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2),
+                            c.blender_gen(K562_Vs2_nD_r1_c2_txt, 2000, hg19, gRNA_Vs2))
 [g[0] for g in gen]
 
 # VEGFAs3 no drug - KU60648
-gen = c.gen_subtract(c.blender_gen(HEK_Vs3_nD_r1_c2_txt, 2000, hg19, gRNA_Vs3),
-                     c.blender_gen(HEK_Vs3_KU_r1_c2_txt, 2000, hg19, gRNA_Vs3))
+gen = c.gen_subtract_exact(c.blender_gen(HEK_Vs3_nD_r1_c2_txt, 2000, hg19, gRNA_Vs3),
+                           c.blender_gen(HEK_Vs3_KU_r1_c2_txt, 2000, hg19, gRNA_Vs3))
 [g[0] for g in gen]
-gen = c.gen_subtract(c.blender_gen(HEK_Vs3_KU_r1_c2_txt, 2000, hg19, gRNA_Vs3),
-                     c.blender_gen(HEK_Vs3_nD_r1_c2_txt, 2000, hg19, gRNA_Vs3))
+gen = c.gen_subtract_exact(c.blender_gen(HEK_Vs3_KU_r1_c2_txt, 2000, hg19, gRNA_Vs3),
+                           c.blender_gen(HEK_Vs3_nD_r1_c2_txt, 2000, hg19, gRNA_Vs3))
+[g[0] for g in gen]
+gen = c.gen_subtract_approx(c.blender_gen(HEK_Vs3_nD_r1_c2_txt, 2000, hg19, gRNA_Vs3),
+                            c.blender_gen(HEK_Vs3_KU_r1_c2_txt, 2000, hg19, gRNA_Vs3))
+[g[0] for g in gen]
+gen = c.gen_subtract_approx(c.blender_gen(HEK_Vs3_KU_r1_c2_txt, 2000, hg19, gRNA_Vs3),
+                            c.blender_gen(HEK_Vs3_nD_r1_c2_txt, 2000, hg19, gRNA_Vs3))
 [g[0] for g in gen]
 
 # VEGFAs2 no drug - KU60648
-gen = c.gen_subtract(c.blender_gen(HEK_Hs4_nD12_r1_c2_txt, 2000, hg19, gRNA_Hs4),
-                     c.blender_gen(HEK_Hs4_KU12_r1_c2_txt, 2000, hg19, gRNA_Hs4))
+gen = c.gen_subtract_exact(c.blender_gen(HEK_Hs4_nD12_r1_c2_txt, 2000, hg19, gRNA_Hs4),
+                           c.blender_gen(HEK_Hs4_KU12_r1_c2_txt, 2000, hg19, gRNA_Hs4))
 [g[0] for g in gen]
-gen = c.gen_subtract(c.blender_gen(HEK_Hs4_KU12_r1_c2_txt, 2000, hg19, gRNA_Hs4),
-                     c.blender_gen(HEK_Hs4_nD12_r1_c2_txt, 2000, hg19, gRNA_Hs4))
+gen = c.gen_subtract_exact(c.blender_gen(HEK_Hs4_KU12_r1_c2_txt, 2000, hg19, gRNA_Hs4),
+                           c.blender_gen(HEK_Hs4_nD12_r1_c2_txt, 2000, hg19, gRNA_Hs4))
+[g[0] for g in gen]
+gen = c.gen_subtract_approx(c.blender_gen(HEK_Hs4_nD12_r1_c2_txt, 2000, hg19, gRNA_Hs4),
+                            c.blender_gen(HEK_Hs4_KU12_r1_c2_txt, 2000, hg19, gRNA_Hs4))
+[g[0] for g in gen]
+gen = c.gen_subtract_approx(c.blender_gen(HEK_Hs4_KU12_r1_c2_txt, 2000, hg19, gRNA_Hs4),
+                            c.blender_gen(HEK_Hs4_nD12_r1_c2_txt, 2000, hg19, gRNA_Hs4))
 [g[0] for g in gen]
 
 
 
 """ ############################################################################################ """
 """  """
+gen = c.gen_subtract_approx(c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2),
+                            c.nature16525_gen(gRNA_Fs2))
+[g[0] for g in gen]
+gen = c.gen_subtract_approx(c.nature16525_gen(gRNA_Fs2),
+                            c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2))
+[g[0] for g in gen]
+
+gen = c.gen_subtract_approx(c.blender_gen(K562_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2),
+                            c.nature16525_gen(gRNA_Vs2))
+[g[0] for g in gen]
+gen = c.gen_subtract_approx(c.nature16525_gen(gRNA_Vs2),
+                            c.blender_gen(K562_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2))
+[g[0] for g in gen]
+
+gen = c.gen_subtract_approx(c.blender_gen(K562_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2),
+                            c.nbt3117_gen(gRNA_Vs2))
+[g[0] for g in gen]
+gen = c.gen_subtract_approx(c.nbt3117_gen(gRNA_Vs2),
+                            c.blender_gen(K562_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2))
+[g[0] for g in gen]
+
+gen = c.gen_subtract_approx(c.blender_gen(iPSC_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2),
+                            c.nbt3117_gen(gRNA_Vs2))
+[g[0] for g in gen]
+gen = c.gen_subtract_approx(c.nbt3117_gen(gRNA_Vs2),
+                            c.blender_gen(iPSC_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2))
+[g[0] for g in gen]
+
+
+""" ############################################################################################ """
+""" Amplicon NGS of to check indels in cells without DNA-PKi, with/without Cas9 (3 replicates). """
 
 gg.generate_ref(c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2),
                 ana_4 + "REF_K562_Fs2_KU_r1_c2", hg19[0], genome_savepath)
 REF = SeqIO.to_dict(SeqIO.parse(ana_4 + "REF_K562_Fs2_KU_r1_c2.fa", "fasta"))
 
-amp.getIndels(ampngs + "merged/Fs2_ON_ct.extendedFrags.fastq", REF,
-              gRNA_Fs2, ana_4 + "Fs2_ON_ct.txt")
-amp.getIndels(ampngs + "merged/Fs2_ON_ep.extendedFrags.fastq", REF,
-              gRNA_Fs2, ana_4 + "Fs2_ON_ep.txt")
+amp.getIndels(ampngs1 + "merged/Fs2_ON_ct1.extendedFrags.fastq", REF,
+              gRNA_Fs2, ana_4 + "Fs2_ON_ct1.txt")
+amp.getIndels(ampngs1 + "merged/Fs2_ON_ep1.extendedFrags.fastq", REF,
+              gRNA_Fs2, ana_4 + "Fs2_ON_ep1.txt")
+amp.getIndels(ampngs2 + "merged/Fs2_ON_ct2.extendedFrags.fastq", REF,
+              gRNA_Fs2, ana_4 + "Fs2_ON_ct2.txt")
+amp.getIndels(ampngs2 + "merged/Fs2_ON_ep2.extendedFrags.fastq", REF,
+              gRNA_Fs2, ana_4 + "Fs2_ON_ep2.txt")
+amp.getIndels(ampngs3 + "merged/Fs2_ON_ct3.extendedFrags.fastq", REF,
+              gRNA_Fs2, ana_4 + "Fs2_ON_ct3.txt")
+amp.getIndels(ampngs3 + "merged/Fs2_ON_ep3.extendedFrags.fastq", REF,
+              gRNA_Fs2, ana_4 + "Fs2_ON_ep3.txt")
 
-amp.getIndels(ampngs + "merged/Fs2_OFF1_ct.extendedFrags.fastq", REF,
-              gRNA_Fs2_OFF1, ana_4 + "Fs2_OFF1_ct.txt")
-amp.getIndels(ampngs + "merged/Fs2_OFF1_ep.extendedFrags.fastq", REF,
-              gRNA_Fs2_OFF1, ana_4 + "Fs2_OFF1_ep.txt")
+amp.getIndels(ampngs1 + "merged/Fs2_OFF1_ct1.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF1, ana_4 + "Fs2_OFF1_ct1.txt")
+amp.getIndels(ampngs1 + "merged/Fs2_OFF1_ep1.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF1, ana_4 + "Fs2_OFF1_ep1.txt")
+amp.getIndels(ampngs2 + "merged/Fs2_OFF1_ct2.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF1, ana_4 + "Fs2_OFF1_ct2.txt")
+amp.getIndels(ampngs2 + "merged/Fs2_OFF1_ep2.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF1, ana_4 + "Fs2_OFF1_ep2.txt")
+amp.getIndels(ampngs3 + "merged/Fs2_OFF1_ct3.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF1, ana_4 + "Fs2_OFF1_ct3.txt")
+amp.getIndels(ampngs3 + "merged/Fs2_OFF1_ep3.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF1, ana_4 + "Fs2_OFF1_ep3.txt")
 
-amp.getIndels(ampngs + "merged/Fs2_OFF2_ct.extendedFrags.fastq", REF,
-              gRNA_Fs2_OFF2, ana_4 + "Fs2_OFF2_ct.txt")
-amp.getIndels(ampngs + "merged/Fs2_OFF2_ep.extendedFrags.fastq", REF,
-              gRNA_Fs2_OFF2, ana_4 + "Fs2_OFF2_ep.txt")
+amp.getIndels(ampngs1 + "merged/Fs2_OFF2_ct1.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF2, ana_4 + "Fs2_OFF2_ct1.txt")
+amp.getIndels(ampngs1 + "merged/Fs2_OFF2_ep1.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF2, ana_4 + "Fs2_OFF2_ep1.txt")
+amp.getIndels(ampngs2 + "merged/Fs2_OFF2_ct2.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF2, ana_4 + "Fs2_OFF2_ct2.txt")
+amp.getIndels(ampngs2 + "merged/Fs2_OFF2_ep2.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF2, ana_4 + "Fs2_OFF2_ep2.txt")
+amp.getIndels(ampngs3 + "merged/Fs2_OFF2_ct3.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF2, ana_4 + "Fs2_OFF2_ct3.txt")
+amp.getIndels(ampngs3 + "merged/Fs2_OFF2_ep3.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF2, ana_4 + "Fs2_OFF2_ep3.txt")
 
-amp.getIndels(ampngs + "merged/Fs2_OFF3_ct.extendedFrags.fastq", REF,
-              gRNA_Fs2_OFF3, ana_4 + "Fs2_OFF3_ct.txt")
-amp.getIndels(ampngs + "merged/Fs2_OFF3_ep.extendedFrags.fastq", REF,
-              gRNA_Fs2_OFF3, ana_4 + "Fs2_OFF3_ep.txt")
+amp.getIndels(ampngs1 + "merged/Fs2_OFF3_ct1.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF3, ana_4 + "Fs2_OFF3_ct1.txt")
+amp.getIndels(ampngs1 + "merged/Fs2_OFF3_ep1.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF3, ana_4 + "Fs2_OFF3_ep1.txt")
+amp.getIndels(ampngs2 + "merged/Fs2_OFF3_ct2.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF3, ana_4 + "Fs2_OFF3_ct2.txt")
+amp.getIndels(ampngs2 + "merged/Fs2_OFF3_ep2.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF3, ana_4 + "Fs2_OFF3_ep2.txt")
+amp.getIndels(ampngs3 + "merged/Fs2_OFF3_ct3.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF3, ana_4 + "Fs2_OFF3_ct3.txt")
+amp.getIndels(ampngs3 + "merged/Fs2_OFF3_ep3.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF3, ana_4 + "Fs2_OFF3_ep3.txt")
 
-amp.getIndels(ampngs + "merged/Fs2_OFF4_ct.extendedFrags.fastq", REF,
-              gRNA_Fs2_OFF4, ana_4 + "Fs2_OFF4_ct.txt")
-amp.getIndels(ampngs + "merged/Fs2_OFF4_ep.extendedFrags.fastq", REF,
-              gRNA_Fs2_OFF4, ana_4 + "Fs2_OFF4_ep.txt")
+amp.getIndels(ampngs1 + "merged/Fs2_OFF4_ct1.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF4, ana_4 + "Fs2_OFF4_ct1.txt")
+amp.getIndels(ampngs1 + "merged/Fs2_OFF4_ep1.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF4, ana_4 + "Fs2_OFF4_ep1.txt")
+amp.getIndels(ampngs2 + "merged/Fs2_OFF4_ct2.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF4, ana_4 + "Fs2_OFF4_ct2.txt")
+amp.getIndels(ampngs2 + "merged/Fs2_OFF4_ep2.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF4, ana_4 + "Fs2_OFF4_ep2.txt")
+amp.getIndels(ampngs3 + "merged/Fs2_OFF4_ct3.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF4, ana_4 + "Fs2_OFF4_ct3.txt")
+amp.getIndels(ampngs3 + "merged/Fs2_OFF4_ep3.extendedFrags.fastq", REF,
+              gRNA_Fs2_OFF4, ana_4 + "Fs2_OFF4_ep3.txt")

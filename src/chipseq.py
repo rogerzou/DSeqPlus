@@ -171,6 +171,60 @@ def shift_gen(generator, dist=10000):
         yield "%s:%i-%i" % (chr_i, lt_i, rt_i), cut, sen, pam, gui, mis, guide
 
 
+def nbt3117_gen(expected_guide):
+    """ Generator to yield all outputted sites from 41587_2015_BFnbt3117_MOESM22_ESM.xlsx,
+        which is the Supplementary Table 2 of
+        Tsai, Shengdar Q., et al. "GUIDE-seq enables genome-wide profiling of off-target cleavage
+        by CRISPR-Cas nucleases." Nature biotechnology 33.2 (2015): 187-197.
+
+    :param expected_guide: on-target protospacer sequence (no PAM)
+    :yield: ( span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide )
+        ( region string, cut site, sense/antisense, PAM, discovered protospacer,
+        # mismatches, non-mismatched protospacer )
+    """
+    data = load_nparray('lib/nbt3117.csv')
+    for d in data[1:]:
+        try:
+            span_rs = "%s:%s-%s" % (d[0], d[1], d[2])
+            cut_i = int((int(d[1]) + int(d[2])) / 2)
+            sen_i = d[5]
+            pam_i = d[9][20:]
+            gui_i = d[9][:20]
+            mis_i = int(d[10])
+            guide = d[8][:20]
+            if guide == expected_guide:
+                yield span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide
+        except ValueError:
+            print("nbt3117_gen(): Skipped entry due to incorrect formatting.")
+
+
+def nature16525_gen(expected_guide):
+    """ Generator to yield all outputted sites from 41586_2016_BFnature16526_MOESM91_ESM.xlsx,
+        which is the Supplementary Table 4 of
+        Kleinstiver, Benjamin P., et al. "High-fidelity CRISPR–Cas9 nucleases with no detectable
+        genome-wide off-target effects." Nature 529.7587 (2016): 490-495.
+
+    :param expected_guide: on-target protospacer sequence (no PAM)
+    :yield: ( span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide )
+        ( region string, cut site, sense/antisense, PAM, discovered protospacer,
+        # mismatches, non-mismatched protospacer )
+    """
+    data = load_nparray('lib/nature16526.csv')
+    for d in data[1:]:
+        try:
+            span_rs = "%s:%s-%s" % (d[0], d[1], d[2])
+            cut_i = int((int(d[1]) + int(d[2])) / 2)
+            sen_i = d[5]
+            pam_i = d[10][20:]
+            gui_i = d[10][:20]
+            mis_i = int(d[11])
+            guide = d[9][:20]
+            if d[7] == 'wild-type' and guide == expected_guide:
+                yield span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide
+        except ValueError:
+            print("nature16525_gen(): Skipped entry due to incorrect formatting.")
+
+
 def blender_gen(blender, span_r, genome, guide):
     """ Generator to yield all peaks from BLENDER output.
 
@@ -600,7 +654,7 @@ def save_subtract(gen, fileout):
     np.savetxt(fileout + "_setsubtract.csv", np.asarray(outa), fmt='%s', delimiter=',', header=head)
 
 
-def gen_subtract(gen1, gen2):
+def gen_subtract_exact(gen1, gen2):
     """ Outputs generator for set of target sites from gen1, subtracted by gen2.
     :param gen1: generator that outputs target sites in the following tuple format:
                 ( span_rs   =   region string in "chr1:100-200" format, centered at cut site
@@ -611,7 +665,6 @@ def gen_subtract(gen1, gen2):
                   mis_i     =   # mismatches             (int)
                   guide     =   intended target sequence (str)
     :param gen2: same format as gen1
-    param outfile: path to output in csv. Default is no output.
     :return: generator for set of target sites from gen1, subtracted by gen2
     """
     gen2list = []
@@ -626,4 +679,37 @@ def gen_subtract(gen1, gen2):
         if cutloc_i not in gen2list:
             countdiff += 1
             yield g
+    print("# of target sites | gen1: %i | gen2: %i | gen1-gen2: %i" % (count1, count2, countdiff))
+
+
+def gen_subtract_approx(gen1, gen2, approx=1000):
+    """ Outputs generator for set of target sites from gen1, subtracted by gen2.
+    :param gen1: generator that outputs target sites in the following tuple format:
+                ( span_rs   =   region string in "chr1:100-200" format, centered at cut site
+                  cut_i     =   cut site                 (int)
+                  sen_i     =   sense/antisense          (+/- str)
+                  pam_i     =   PAM                      (str)
+                  gui_i     =   genomic target sequence  (str)
+                  mis_i     =   # mismatches             (int)
+                  guide     =   intended target sequence (str)
+    :param gen2: same format as gen1
+    :param approx: max distance in coordinates between cut sites to be counted as the same one
+    :return: generator for set of target sites from gen1, subtracted by gen2
+    """
+    gen2list = []
+    count2, count1, countdiff = 0, 0, 0
+    for g2 in gen2:
+        cutloc_i = (re.split('[:-]', g2[0])[0], g2[1])
+        gen2list.append(cutloc_i)
+        count2 += 1
+    for g1 in gen1:
+        cutloc_1 = (re.split('[:-]', g1[0])[0], g1[1])
+        count1 += 1
+        bool_include = True
+        for cutloc_2 in gen2list:
+            if cutloc_1[0] == cutloc_2[0] and abs(cutloc_1[1] - cutloc_2[1]) <= approx:
+                bool_include = False
+        if bool_include:
+            countdiff += 1
+            yield g1
     print("# of target sites | gen1: %i | gen2: %i | gen1-gen2: %i" % (count1, count2, countdiff))
