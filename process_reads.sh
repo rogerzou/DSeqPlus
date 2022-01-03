@@ -22,12 +22,25 @@ declare -a filelist=(\
 #  "/mnt/d/210301_Dseq+/A18_sub" \
 #  "/mnt/d/210301_Dseq+/A19" \
 #  "/mnt/d/210301_Dseq+/A20" \
+#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A05_mPCSK9_nd24h_r4_sub" \
+#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A06_mPCSK9_KU24h_r4_sub" \
+#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A08_mPCSK9_nd24h_r2_sub" \
+#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A11_mPCSK9_KU24h_r2_sub" \
+#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A09_mPCSK9_nd24h_r3_sub" \
+#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A12_mPCSK9_KU24h_r3_sub" \
+#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A02_mPCSK9_nd24h_r0_sub" \
+#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A03_mPCSK9_KU24h_r0_sub" \
+#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A07_mPCSK9_nd24h_r1_sub" \
+#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A10_mPCSK9_KU24h_r1_sub" \
+#  "/mnt/c/Users/rzou4/Downloads/SRR8553804" \
+#  "/mnt/c/Users/rzou4/Downloads/SRR8553806" \
 )
 
 # Enter path to indexed genome
 hg38path="/mnt/c/Users/Roger/bioinformatics/hg38_bowtie2/hg38"
 hg19path="/mnt/c/Users/Roger/bioinformatics/hg19_bowtie2/hg19"
-mm10path="/mnt/c/Users/Roger/bioinformatics/mm10_bowtie2/mm10"
+# mm10path="/mnt/c/Users/Roger/bioinformatics/mm10_bowtie2/mm10"
+mm10path="/home/roger/bioinformatics/mm10/mm10"
 ##########################################
 
 

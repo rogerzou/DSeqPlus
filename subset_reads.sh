@@ -34,6 +34,28 @@
 #  "/mnt/d/210301_Dseq+/A18" \
 #)
 
+#declare -a filelist1=(\
+#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A08_mPCSK9_nd24h_r2" \
+#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A11_mPCSK9_KU24h_r2" \
+#)
+#declare -a filelist2=(\
+#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A09_mPCSK9_nd24h_r3" \
+#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A12_mPCSK9_KU24h_r3" \
+#)
+#declare -a filelist3=(\
+#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A05_mPCSK9_nd24h_r4" \
+#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A06_mPCSK9_KU24h_r4" \
+#)
+#declare -a filelist1=(\
+#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A02_mPCSK9_nd24h_r0" \
+#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A03_mPCSK9_KU24h_r0" \
+#)
+#declare -a filelist2=(\
+#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A07_mPCSK9_nd24h_r1" \
+#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A10_mPCSK9_KU24h_r1" \
+#)
+
+
 ##########################################
 
 
