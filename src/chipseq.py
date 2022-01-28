@@ -12,7 +12,6 @@ import os
 import re
 import numpy as np
 import csv
-import subprocess as sp
 
 OLD_CHAR = "ACGT"
 NEW_CHAR = "TGCA"
@@ -143,12 +142,13 @@ def mismatch_filter_gen(generator, mismatch):
                   gui_i     =   genomic target sequence  (str)
                   mis_i     =   # mismatches             (int)
                   guide     =   intended target sequence (str)
+                  val_i     =   enrichment value         (int)
     :param mismatch: filter to only yield cut sites that have specified # of mismatches from
                      gRNA sequence
     """
-    for rs, cut, sen, pam, gui, mis, tar in generator:
+    for rs, cut, sen, pam, gui, mis, tar, val in generator:
         if mis == mismatch:
-            yield rs, cut, sen, pam, gui, mis, tar
+            yield rs, cut, sen, pam, gui, mis, tar, val
 
 
 def shift_gen(generator, dist=10000):
@@ -161,14 +161,15 @@ def shift_gen(generator, dist=10000):
                   gui_i     =   genomic target sequence  (str)
                   mis_i     =   # mismatches             (int)
                   guide     =   intended target sequence (str)
+                  val_i     =   enrichment value         (int)
     :param dist: distance away from original position to shift
     :return: generator with each position shifted by dist
     """
-    for rs, cut, sen, pam, gui, mis, guide in generator:
+    for rs, cut, sen, pam, gui, mis, guide, val_i in generator:
         rs_spt = re.split('[:-]', rs)
         chr_i, lt_i, rt_i = rs_spt[0], int(rs_spt[1]) + dist, int(rs_spt[2]) + dist
         cut += dist
-        yield "%s:%i-%i" % (chr_i, lt_i, rt_i), cut, sen, pam, gui, mis, guide
+        yield "%s:%i-%i" % (chr_i, lt_i, rt_i), cut, sen, pam, gui, mis, guide, val_i
 
 
 def nbt3117_gen(expected_guide):
@@ -178,51 +179,97 @@ def nbt3117_gen(expected_guide):
         by CRISPR-Cas nucleases." Nature biotechnology 33.2 (2015): 187-197.
 
     :param expected_guide: on-target protospacer sequence (no PAM)
-    :yield: ( span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide )
+    :yield: ( span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide, val_i )
         ( region string, cut site, sense/antisense, PAM, discovered protospacer,
-        # mismatches, non-mismatched protospacer )
+        # mismatches, non-mismatched protospacer, GUIDE-seq reads )
     """
     data = load_nparray('lib/nbt3117.csv')
     for d in data[1:]:
         try:
             span_rs = "%s:%s-%s" % (d[0], d[1], d[2])
             cut_i = int((int(d[1]) + int(d[2])) / 2)
+            val_i = int(d[4])
             sen_i = d[5]
             pam_i = d[9][20:]
             gui_i = d[9][:20]
             mis_i = int(d[10])
             guide = d[8][:20]
             if guide == expected_guide:
-                yield span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide
+                yield span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide, val_i
         except ValueError:
             print("nbt3117_gen(): Skipped entry due to incorrect formatting.")
 
 
-def nature16525_gen(expected_guide):
+def nature16525_gen(expected_guide, verbose=False):
     """ Generator to yield all outputted sites from 41586_2016_BFnature16526_MOESM91_ESM.xlsx,
         which is the Supplementary Table 4 of
         Kleinstiver, Benjamin P., et al. "High-fidelity CRISPR–Cas9 nucleases with no detectable
         genome-wide off-target effects." Nature 529.7587 (2016): 490-495.
 
     :param expected_guide: on-target protospacer sequence (no PAM)
-    :yield: ( span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide )
+    :param verbose: print ValueError statement
+    :yield: ( span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide, val_i )
         ( region string, cut site, sense/antisense, PAM, discovered protospacer,
-        # mismatches, non-mismatched protospacer )
+        # mismatches, non-mismatched protospacer, GUIDE-seq reads )
     """
     data = load_nparray('lib/nature16526.csv')
     for d in data[1:]:
         try:
             span_rs = "%s:%s-%s" % (d[0], d[1], d[2])
             cut_i = int((int(d[1]) + int(d[2])) / 2)
+            val_i = int(d[4])
             sen_i = d[5]
             pam_i = d[10][20:]
             gui_i = d[10][:20]
             mis_i = int(d[11])
             guide = d[9][:20]
             if d[7] == 'wild-type' and guide == expected_guide:
-                yield span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide
+                yield span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide, val_i
         except ValueError:
-            print("nature16525_gen(): Skipped entry due to incorrect formatting.")
+            if verbose:
+                print("nature16525_gen(): Skipped entry due to incorrect formatting:.")
+                print(d)
+
+
+def aav9023_gen(expected_guide, choice=0, verbose=False):
+    """ Generator to yield all outputted sites from aav9023_pooled.csv or aav9023_individual.csv,
+        which is a Supplementary Table of
+        Wienert, B., Wyman, S.K., et al. Unbiased detection of CRISPR off-targets in vivo using
+        DISCOVER-Seq. Science 364, 286-289 (2019).
+
+    :param expected_guide: on-target protospacer sequence (no PAM)
+    :param choice: 0 for the pooled dataset, 1 for individual rep1, 2 for individual rep2
+    :param verbose:
+    :yield: ( span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide, val_i )
+        ( region string, cut site, sense/antisense, PAM, discovered protospacer,
+        # mismatches, non-mismatched protospacer, DISCO score )
+    """
+    if choice == 0:
+        data = load_nparray('lib/aav9023_pooled.csv')
+    elif choice == 1 or choice == 2:
+        data = load_nparray('lib/aav9023_individual.csv')
+    else:
+        return ValueError("aav9023_gen(): Incorrect entry for choice variable.")
+    for d in data[1:]:
+        try:
+            span_rs = d[5]
+            cut_i = int(d[6])
+            sen_i = '+' if d[7] == "sense" else '-'
+            pam_i = d[8]
+            gui_i = d[9]
+            mis_i = int(d[10])
+            guide = expected_guide
+            val_i = int(d[12])
+            if choice == 0:
+                yield span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide, val_i
+            elif choice == 1 and d[11] == '24h_1':
+                yield span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide, val_i
+            elif choice == 2 and d[11] == '24h_2':
+                yield span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide, val_i
+        except ValueError:
+            if verbose:
+                print("aav9023_gen(): Skipped entry due to incorrect formatting.")
+                print(d)
 
 
 def blender_gen(blender, span_r, genome, guide):
@@ -232,9 +279,9 @@ def blender_gen(blender, span_r, genome, guide):
     :param span_r: radius of window from peak center for downstream analysis
     :param genome: [genome name, path to genome with .fa extension], i.e. ['hg38', path/to/hg38.fa]
     :param guide: on-target protospacer sequence (no PAM)
-    :yield: ( span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide )
+    :yield: ( span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide, val_i )
         ( region string, cut site, sense/antisense, PAM, discovered protospacer,
-        # mismatches, non-mismatched protospacer )
+        # mismatches, non-mismatched protospacer, DISCO score )
     """
     b_out = np.loadtxt(blender, dtype=object, skiprows=1, delimiter='\t')
     numpeaks = b_out.shape[0]
@@ -248,86 +295,14 @@ def blender_gen(blender, span_r, genome, guide):
             else:
                 sen_i = '-'
                 cut_i = int(b_out[i, 1]) + 1
+            val_i = int(b_out[i, 2])
             pam_i = b_out[i, 5]
             gui_i = b_out[i, 6]
             mis_i = int(b_out[i, 7])
             span_sta = max(1, cut_i - span_r)
             span_end = min(hgsize[chr_i], cut_i + span_r)
             span_rs = "%s:%i-%i" % (chr_i, span_sta, span_end)
-            yield span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide
-
-
-def macs_gen(peak, span_r, genome, guide, mismatch=20, cent_r=200, fenr=0):
-    """ Generator to yield all peaks from macs2 output.
-
-    :param peak: macs2 output file
-    :param span_r: radius of window from peak center for downstream analysis
-    :param genome: [genome name, path to genome with .fa extension], i.e. ['hg38', path/to/hg38.fa]
-    :param guide: on-target protospacer sequence (no PAM)
-    :param mismatch: number of mismatches from protospacer to accept
-    :param cent_r: radius of window from peak center to search for cut site
-    :param fenr: minimum fold enrichment of peak to be considered
-    :yield: ( span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide )
-            ( region string, cut site, sense/antisense, PAM, discovered protospacer,
-            # mismatches, non-mismatched protospacer )
-
-    """
-    m_out = np.loadtxt(peak, dtype=object)    # load macs2 narrowPeak output file
-    numpeaks = m_out.shape[0]                 # number of peaks from blender
-    hgsize = get_genome_dict(genome[0])
-    for i in range(numpeaks):
-        chr_i, fenr_i = m_out[i, 0], float(m_out[i, 6])
-        if chr_i in hgsize and fenr_i >= fenr:
-            center = int(m_out[i, 9]) + int(m_out[i, 1])
-            cent_sta = max(1, center - cent_r)
-            cent_end = min(hgsize[chr_i], center + cent_r)
-            cent_rs = "%s:%i-%i" % (chr_i, cent_sta, cent_end)
-            cent_faidx = sp.check_output(['samtools', 'faidx', genome[1], cent_rs]).split()
-            seq = (b"".join(cent_faidx[1:]).upper()).decode("utf-8")
-            cand = sub_findmis(seq, guide, mismatch)
-            if cand is not None and len(cand) > 0:
-                cut_i = cent_sta + cand[0][2]
-                sen_i = '+' if cand[0][5] == 1 else '-'
-                pam_i = cand[0][4]
-                gui_i = cand[0][3]
-                mis_i = cand[0][1]
-                span_sta = max(1, cut_i - span_r)
-                span_end = min(hgsize[chr_i], cut_i + span_r)
-                span_rs = "%s:%i-%i" % (chr_i, span_sta, span_end)
-                if pam_i in {'NGG', 'AGG', 'CGG', 'GGG', "TGG"}:
-                    yield span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide
-
-
-def single_gen(chr_i, cut_i, radius, genome, guide):
-    """ Target site generator type for a single cut site.
-
-    :param chr_i: chromosome of interest
-    :param cut_i: cut position of interest
-    :param radius: radius of analysis from cut site
-    :param genome: [genome name, path to genome with .fa], i.e. ['hg38', path/to/hg38.fa]
-    :param guide: gRNA protospacer sequence, excluding PAM
-    :yield: ( span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide )
-            ( region string, cut site, sense/antisense, PAM, discovered protospacer,
-            # mismatches, non-mismatched protospacer )
-    """
-    hgsize = get_genome_dict(genome[0])
-    cent_sta = max(1, cut_i - radius)
-    cent_end = min(hgsize[chr_i], cut_i + radius)
-    cent_rs = "%s:%i-%i" % (chr_i, cent_sta, cent_end)
-    cent_faidx = sp.check_output(['samtools', 'faidx', genome[1], cent_rs]).split()
-    seq = (b"".join(cent_faidx[1:]).upper()).decode("utf-8")
-    cand = sub_findmis(seq, guide, maxmismatch=0)
-    if cand is not None and len(cand) > 0:
-        cut_i = cent_sta + cand[0][2]
-        sen_i = '+' if cand[0][5] == 1 else '-'
-        pam_i = cand[0][4]
-        gui_i = cand[0][3]
-        mis_i = cand[0][1]
-        span_sta = max(1, cut_i - radius)
-        span_end = min(hgsize[chr_i], cut_i + radius)
-        span_rs = "%s:%i-%i" % (chr_i, span_sta, span_end)
-        if pam_i in {'NGG', 'AGG', 'CGG', 'GGG', "TGG"}:
-            yield span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide
+            yield span_rs, cut_i, sen_i, pam_i, gui_i, mis_i, guide, val_i
 
 
 def sub_findmis(s, matchstr, maxmismatch):
@@ -388,6 +363,7 @@ def peak_profile_wide(generator, genome, bamfilein, fileout, norm_type=None,
                   gui_i     =   genomic target sequence  (str)
                   mis_i     =   # mismatches             (int)
                   guide     =   intended target sequence (str)
+                  val_i     =   enrichment value         (int)
     :param fileout: path to output file name (excludes extension)
     :param norm_type: If None (default), then normalize to RPM. If False, then no normalization.
                        Otherwise, if list, then assume list of region strings for normalization,
@@ -414,7 +390,7 @@ def peak_profile_wide(generator, genome, bamfilein, fileout, norm_type=None,
         bamalt = pysam.AlignmentFile(norm_type, 'rb')
         norm_num = bamalt.mapped / 1E6
         bamalt.close()
-    for rs, cut, sen, pam, gui, mis, guide in generator:
+    for rs, cut, sen, pam, gui, mis, guide, val in generator:
         chr_i = re.split('[:-]', rs)[0]
         sta_i = cut - span_rad
         end_i = cut + span_rad
@@ -451,6 +427,7 @@ def peak_profile_bp_resolution(generator, bamfilein, fileout, norm_type=None):
                   gui_i     =   genomic target sequence  (str)
                   mis_i     =   # mismatches             (int)
                   guide     =   intended target sequence (str)
+                  val_i     =   enrichment value         (int)
     :param fileout: path to output file name (excludes extension)
     :param norm_type: If None (default), then normalize to RPM. If False, then no normalization.
                        Otherwise, if list, then assume list of region strings for normalization,
@@ -471,7 +448,7 @@ def peak_profile_bp_resolution(generator, bamfilein, fileout, norm_type=None):
         bamalt = pysam.AlignmentFile(norm_type, 'rb')
         norm_num = bamalt.mapped / 1E6
         bamalt.close()
-    for rs, cut, sen, pam, gui, mis, guide in generator:
+    for rs, cut, sen, pam, gui, mis, guide, val in generator:
         [chr_i, sta_i, end_i] = re.split('[:-]', rs)
         sta_i = int(sta_i)
         end_i = int(end_i)
@@ -535,6 +512,7 @@ def read_subsets(generator, filein, fileout):
                   gui_i     =   genomic target sequence  (str)
                   mis_i     =   # mismatches             (int)
                   guide     =   intended target sequence (str)
+                  val_i     =   enrichment value         (int)
     :param filein: path to input BAM file for analysis
     :param fileout: path to output file name (excluding extensions)
 
@@ -554,7 +532,7 @@ def read_subsets(generator, filein, fileout):
     bamabut = pysam.AlignmentFile(fileout + "_abut.bam", 'wb', template=bamin)
     bamelse = pysam.AlignmentFile(fileout + "_else.bam", 'wb', template=bamin)
     LS = []
-    for rs, cut, sen, pam, gui, mis, tar in generator:
+    for rs, cut, sen, pam, gui, mis, tar, val in generator:
         ctM, ctN, ctL, ctR, ctT = 0, 0, 0, 0, 0
         for read1, read2 in read_pair_generator(bamin, rs):
             read = read_pair_align(read1, read2)
@@ -616,6 +594,7 @@ def read_counts(generator, filein, fileout=None):
                   gui_i     =   genomic target sequence  (str)
                   mis_i     =   # mismatches             (int)
                   guide     =   intended target sequence (str)
+                  val_i     =   enrichment value         (int)
     :param filein: path to input BAM file for analysis
     :param fileout: path to output file name (excluding extensions)
 
@@ -624,7 +603,7 @@ def read_counts(generator, filein, fileout=None):
     """
     bam = pysam.AlignmentFile(filein, 'rb')             # BAM file for analysis
     list_stat = []
-    for rs, cut, sen, pam, gui, mis, tar in generator:
+    for rs, cut, sen, pam, gui, mis, tar, val in generator:
         ct_rpm = bam.count(region=rs) / bam.mapped * 1E6
         list_stat.append((rs, cut, sen, gui, mis, ct_rpm))
     bam.close()
@@ -635,7 +614,7 @@ def read_counts(generator, filein, fileout=None):
     return list_stat
 
 
-def save_subtract(gen, fileout):
+def save_gen(gen, fileout):
     """
     :param gen: generator that outputs target sites in the following tuple format:
                 ( span_rs   =   region string in "chr1:100-200" format, centered at cut site
@@ -645,13 +624,14 @@ def save_subtract(gen, fileout):
                   gui_i     =   genomic target sequence  (str)
                   mis_i     =   # mismatches             (int)
                   guide     =   intended target sequence (str)
+                  val_i     =   enrichment value         (int)
     :param fileout: path to CSV output, extension omitted.
     """
     outa = []
     for g in gen:
         outa.append(g)
-    head = 'region string, cut, sense, PAM, actual sequence, # mismatches, intended sequence'
-    np.savetxt(fileout + "_setsubtract.csv", np.asarray(outa), fmt='%s', delimiter=',', header=head)
+    head = 'region string, cut, sense, PAM, actual sequence, # mismatches, intended sequence, val'
+    np.savetxt(fileout + "_savegen.csv", np.asarray(outa), fmt='%s', delimiter=',', header=head)
 
 
 def gen_subtract_exact(gen1, gen2):
@@ -664,6 +644,7 @@ def gen_subtract_exact(gen1, gen2):
                   gui_i     =   genomic target sequence  (str)
                   mis_i     =   # mismatches             (int)
                   guide     =   intended target sequence (str)
+                  val_i     =   enrichment value         (int)
     :param gen2: same format as gen1
     :return: generator for set of target sites from gen1, subtracted by gen2
     """
@@ -692,6 +673,7 @@ def gen_subtract_approx(gen1, gen2, approx=1000):
                   gui_i     =   genomic target sequence  (str)
                   mis_i     =   # mismatches             (int)
                   guide     =   intended target sequence (str)
+                  val_i     =   enrichment value         (int)
     :param gen2: same format as gen1
     :param approx: max distance in coordinates between cut sites to be counted as the same one
     :return: generator for set of target sites from gen1, subtracted by gen2
@@ -713,3 +695,68 @@ def gen_subtract_approx(gen1, gen2, approx=1000):
             countdiff += 1
             yield g1
     print("# of target sites | gen1: %i | gen2: %i | gen1-gen2: %i" % (count1, count2, countdiff))
+
+
+def gen_union_approx(gen1, gen2, approx=1000):
+    """ Outputs generator for set of target sites that is union of gen1 and gen2
+    :param gen1: generator that outputs target sites in the following tuple format:
+                ( span_rs   =   region string in "chr1:100-200" format, centered at cut site
+                  cut_i     =   cut site                 (int)
+                  sen_i     =   sense/antisense          (+/- str)
+                  pam_i     =   PAM                      (str)
+                  gui_i     =   genomic target sequence  (str)
+                  mis_i     =   # mismatches             (int)
+                  guide     =   intended target sequence (str)
+                  val_i     =   enrichment value         (int)
+    :param gen2: same format as gen1
+    :param approx: max distance in coordinates between cut sites to be counted as the same one
+    :return: generator for set of target sites that is the union of gen1 and gen2
+    """
+    countuni = 0
+    list1, list2 = list(gen1), list(gen2)
+    for g1 in list1:
+        cutloc_1 = (re.split('[:-]', g1[0])[0], g1[1])
+        for g2 in list2:
+            cutloc_2 = (re.split('[:-]', g2[0])[0], g2[1])
+            if cutloc_1[0] == cutloc_2[0] and abs(cutloc_1[1] - cutloc_2[1]) <= approx:
+                countuni += 1
+                yield g2
+                break
+    count1, count2 = len(list1), len(list2)
+    print("# of target sites | gen1: %i | gen2: %i | gen1 U gen2: %i" % (count1, count2, countuni))
+
+
+def union_approx(gens, fileout, approx=1000):
+    """ For more than one generator of target sites, output the union wrt to the first generator.
+    :param gens: list of generators of following tuple format:
+                ( span_rs   =   region string in "chr1:100-200" format, centered at cut site
+                  cut_i     =   cut site                 (int)
+                  sen_i     =   sense/antisense          (+/- str)
+                  pam_i     =   PAM                      (str)
+                  gui_i     =   genomic target sequence  (str)
+                  mis_i     =   # mismatches             (int)
+                  guide     =   intended target sequence (str)
+                  val_i     =   enrichment value         (int)
+    :param fileout: path to CSV output, extension omitted.
+    :param approx: the same target site between different gen should be within 'approx' bp away.
+    """
+    out_all = []
+    # Use the target sites from the first generator as point of comparison
+    for g in gens[0]:
+        out_all.append(g)
+    out_all = np.asarray(out_all).astype(object)
+    out_all[:, -1] = out_all[:, -1].astype(int)
+    out_all = out_all[np.argsort(-out_all[:, -1])]
+    # Iterate through target sites from remaining generators, match to those of first generator
+    for gen in gens[1:]:        # iterate through each file (generator)
+        out_i = np.zeros((len(out_all), 1)).astype(object)
+        out_i[:] = ''
+        for g in gen:           # iterate through each target site in specific generator
+            for i, x in enumerate(out_all):     # compare to existing target sites
+                # if { chr, cut, sen, pam, gui, mis } match
+                if x[0].split(':')[0] == g[0].split(':')[0] and abs(int(x[1]) - g[1]) < approx and \
+                        x[2] == g[2] and x[3] == g[3] and x[4] == g[4] and int(x[5]) == g[5]:
+                    out_i[i] = g[-1]
+                    break
+        out_all = np.hstack((out_all, out_i))
+    np.savetxt(fileout + ".csv", np.asarray(out_all), fmt='%s', delimiter=',')

@@ -1,0 +1,38 @@
+﻿Input sample,control sample ,gRNA,gene,Cas9,mm10 coordinates,cut site,strand,PAM direction,off-target sequence,mismatches,CIRCLE-Seq rank (VIVO data),DISCOVER Score
+pooled edited,pooled control,gP+G,Pcsk9,WT,chr4:106463846-106463865,106463862,sense,NGG,AGCAGCAGCGGCGGCAACAG,0,1,919
+pooled edited,pooled control,gP+G,Rgmb,WT,chr17:15826035-15826054,15826051,sense,NGG,AGCAGCAGCAGCAGCAACAG,2,9,655
+pooled edited,pooled control,gP+G,Marcks,WT,chr10:37138614-37138633,37138630,sense,NGG,AGCAGCAGCAGCAGCAACAG,2,8,452
+pooled edited,pooled control,gP+G,Ramp2,WT,chr11:101246542-101246561,101246544,antisense,NGG,AGCAGCAGCAGCAGCAACAG,2,2,272
+pooled edited,pooled control,gP+G,Tug1 site 1 (NC),WT,chr11:3602316-3602335,3602318,antisense,NGG,AGCAGCAGCAGCAGCAACAG,2,229,267
+pooled edited,pooled control,gP+G,Tug1 site 2 (NC),WT,chr11:3602648-3602667,3602650,antisense,NGG,AGCAGCAGCAGCAGCAACAG,2,666,218
+pooled edited,pooled control,gP+G,Tug1 site 3 (NC),WT,chr11:3602880-3602899,3602882,antisense,NGG,AGCAGCAGCAGCAGCAACAG,2,159,163
+pooled edited,pooled control,gP+G,Neo1,WT,chr9:59036031-59036050,59036047,sense,NAG,AGCAGCAGCGGCAGCAACAG,1,3,146
+pooled edited,pooled control,gP+G,St8sia2 (NC),WT,chr7:73927432-73927451,73927448,sense,NGG,AGCAGCAGCAGCAGCAACAG,2,4,66
+pooled edited,pooled control,gP+G,Krtap4-2,WT,chr11:99634631-99634650,99634647,sense,NGG,AGCAGCAGGGGCGGCAACAG,1,598,63
+pooled edited,pooled control,gP+G,Dmkn,WT,chr7:30765381-30765400,30765397,sense,NGG,AGTAGCAGCGGCAGCAACAG,2,122,57
+pooled edited,pooled control,gP+G,Krtap4-7,WT,chr11:99643639-99643658,99643655,sense,NGG,AGCAGCAGGGGCGGCAACAG,1,339,57
+pooled edited,pooled control,gP+G,Krtap4-7 (NC),WT,chr11:99649767-99649786,99649783,sense,NGG,AGCAGCAGGGGCGGCAACAG,1,488,47
+pooled edited,pooled control,gP+G,D6Ertd527e,WT,chr6:87111979-87111998,87111995,sense,NGG,AGCAGCAGCCGCGGCAACAG,1,11,42
+pooled edited,pooled control,gP+G,Glg1,WT,chr8:111258957-111258976,111258959,antisense,NAG,AGCAGCAGCAGCAGCAACAG,2,543,24
+pooled edited,pooled control,gP+G,Sp3,WT,chr2:72979526-72979545,72979528,antisense,NAG,AGCAGCAGCAGCAGCAACAG,2,15,13
+pooled edited,pooled control,gP+G,Runx2,WT,chr17:44735497-44735516,44735499,antisense,NAG,AGCAGCAGCAGCAGCAACAG,2,98,10
+pooled edited,pooled control,gP+G,Nectin2,WT,chr7:19749232-19749251,19749248,sense,NGG,AGCAGTAGCAGCGGCAACAA,3,40,9
+pooled edited,pooled control,gP+G,Mir5098,WT,chr8:107368928-107368947,107368944,sense,NAG,AGCAGCAGCAGCAGCAACAG,2,2509,9
+pooled edited,pooled control,gP+G,Eea1 (NC),WT,chr10:95909364-95909383,95909366,antisense,NGG,AGCAGCAGCAACAGCAACAG,3,14,8
+pooled edited,pooled control,gP+G,Ttll11,WT,chr2:35977743-35977762,35977759,sense,NAG,AGCAGCAGCAGCAGCAACAG,2,78,7
+pooled edited,pooled control,gP+G,Stc1 (NC),WT,chr14:69029152-69029171,69029168,sense,NAG,AGCAGCAGCAGCAGCAACAG,2,131,7
+pooled edited,pooled control,gP+G,Arhgef6,WT,chrX:57326729-57326748,57326745,sense,NAG,AGCAGCAGCAGCAGCAACAG,2,299,7
+pooled edited,pooled control,gP+G,Aff1,WT,chr5:103773147-103773166,103773149,antisense,NAG,AGCAGCAGCAGCAGCAACAG,2,133,6
+pooled edited,pooled control,gP+G,Trim 56 (NC),WT,chr5:137151763-137151782,137151779,sense,NAG,AGCAATAGTGGTGACATCAG,6,0,6
+pooled edited,pooled control,gP+G,Kmt2d,WT,chr15:98845833-98845852,98845835,antisense,NAG,AGCAGCAGCAGCAGCAACAG,2,220,6
+pooled edited,pooled control,gP+G,Chr5 (NC),WT,chr5:119013620-119013639,119013636,sense,NAG,AGCAGCAACAGCAGCAACAG,3,573,4
+pooled edited,pooled control,gP+G,Prrc2a,WT,chr17:35158147-35158166,35158149,antisense,NAG,AGCAGCAGCAGCAGCAACAG,2,197,4
+pooled edited,pooled control,gP+G,Mcc,WT,chr18:44552680-44552699,44552696,sense,NAG,AGCAGCAGCAGCAGCAACAG,2,244,4
+pooled edited,pooled control,gP+G,Smarca2,WT,chr19:26631003-26631022,26631019,sense,NAG,AGCAGCAGCAGCAGCAACAG,2,477,4
+pooled edited,pooled control,gP+G,Pex14,WT,chr4:149048518-149048537,149048534,sense,NAG,AGCAGCAGCAGCAGCAACAG,2,139,3
+pooled edited,pooled control,gP+G,D6Ertd527e site 2,WT,chr6:87111274-87111293,87111290,sense,NAG,AGCAGCAGCAGCAGCAACAG,2,697,3
+pooled edited,pooled control,gP+G,Kat6a,WT,chr8:22939651-22939670,22939667,sense,NAG,AGCAGCAGCAGCAGCAACAG,2,57,3
+pooled edited,pooled control,gP+G,Krtap4-1,WT,chr11:99627786-99627805,99627802,sense,NGG,AGCAACAGGGGCGGCAACAG,2,1949,3
+pooled edited,pooled control,gP+G,Gja3,WT,chr14:57047062-57047081,57047064,antisense,NAG,AGCAGCAGCAGCAGCAGCAG,3,2548,3
+pooled edited,pooled control,gP+G,Brwd1,WT,chr16:96068868-96068887,96068870,antisense,NAG,AGCAGCAGCAGCAGCAACAG,2,24,3
+pooled edited,pooled control,gP+G,Stag2 (NC),WT,chrX:42320462-42320481,42320464,antisense,NAG,AGCAGCAGCAGCAGCAGCAG,3,2371,3

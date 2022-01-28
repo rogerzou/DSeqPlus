@@ -84,7 +84,7 @@ def generate_ref(generator, outfile, genome_str, savepath, rlen=300):
     """
     genome_initialized(savepath, genome_str)
     with open(outfile + ".fa", 'w') as f1:
-        for rs, cut, sen, pam, gui, mis, guide in generator:
+        for rs, cut, sen, pam, gui, mis, guide, val in generator:
             chr_i = re.split('[:-]', rs)[0]
             genome_i = genome_seq[chr_i]
             genome_i_len = len(genome_i)
