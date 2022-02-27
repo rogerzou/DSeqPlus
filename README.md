@@ -1,4 +1,4 @@
-Custom analysis software for DISCOVER-seq+
+Custom analysis software for DISCOVER-Seq+
 ====
 
 ## Software requirements
@@ -13,17 +13,20 @@ Custom analysis software for DISCOVER-seq+
 
 ## Installation
 1. Download sequencing reads in FASTQ format from SRA
-2. Download the prebuilt bowtie2 indices for human hg19 and hg38 genome assemblies
+2. Download the prebuilt bowtie2 indices for various genome assemblies
     - [Human hg38](https://genome-idx.s3.amazonaws.com/bt/GRCh38_noalt_as.zip)
     - [Human hg19](https://genome-idx.s3.amazonaws.com/bt/hg19.zip)
-    - Extract from archive, move to the corresponding folders named `hg38_bowtie2/` and `hg19_bowtie2/`
+    - [Mouse mm10](https://genome-idx.s3.amazonaws.com/bt/mm10.zip)
+    - Extract from archive, move to the corresponding folders named `hg38_bowtie2/`,`hg19_bowtie2/`, or `mm10_bowtie2/`
 3. Download two human hg19 and hg38 genome assemblies in FASTA format
     - [hg38.fa](https://hgdownload.cse.ucsc.edu/goldenpath/hg38/bigZips/hg38.fa.gz)
     - [hg19.fa](http://hgdownload.cse.ucsc.edu/goldenPath/hg19/bigZips/hg19.fa.gz)
-    - Extract from archive, move to the corresponding folders named `hg38_bowtie2/` and `hg19_bowtie2/`
+    - [mm10.fa](https://hgdownload.soe.ucsc.edu/goldenPath/mm10/bigZips/mm10.fa.gz)
+    - Extract from archive, move to the corresponding folders named `hg38_bowtie2/`,`hg19_bowtie2/`, or `mm10_bowtie2/`
 4. Generate FASTA file indices
     - `samtools faidx hg38_bowtie2/hg38.fa`
     - `samtools faidx hg19_bowtie2/hg19.fa`
+    - `samtools faidx mm10_bowtie2/mm10.fa`
 
 ## Usage
 Bash scripts are used to automate the processing of sequencing data.
@@ -33,6 +36,6 @@ has the same # of reads
 
 Shell file of type `blender_*_xxxx_cc.sh` are used to perform 
 [BLENDER](https://github.com/staciawyman/blender). `*` indicates sequencing file dataset,
-`xxxx` indicates genome (`hg19` or `mm10`), and cc indicates either `c2` or `c3` BLENDER parameter.
+`xxxx` indicates genome (`hg19` or `mm10`), and `cc` indicates either `c2` or `c3` BLENDER parameter.
 
 A Python script `script_1.py` is used to perform analysis of various data featured in the manuscript.
