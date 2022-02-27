@@ -70,6 +70,10 @@ mm10_mP9_nD_merge_bam = datadir + "211213_Dseq+/mPCSK9_nD24h_merged.bam"
 mm10_mP9_KU_merge_bam = datadir + "211213_Dseq+/mPCSK9_KU24h_merged.bam"
 mm10_mP9_nD_merge_txt = datadir + "Dseq+/mouse_PCSK9_nD_merged_c3/filtered_blender_hits.txt"
 mm10_mP9_KU_merge_txt = datadir + "Dseq+/mouse_PCSK9_KU_merged_c3/filtered_blender_hits.txt"
+mm10_mP9_nD_r2_c2_txt = datadir + "Dseq+/mouse_PCSK9_nD_r2_c2/filtered_blender_hits.txt"
+mm10_mP9_KU_r2_c2_txt = datadir + "Dseq+/mouse_PCSK9_KU_r2_c2/filtered_blender_hits.txt"
+mm10_mP9_nD_r3_c2_txt = datadir + "Dseq+/mouse_PCSK9_nD_r3_c2/filtered_blender_hits.txt"
+mm10_mP9_KU_r3_c2_txt = datadir + "Dseq+/mouse_PCSK9_KU_r3_c2/filtered_blender_hits.txt"
 
 ampngs1 = datadir + "210720_ampNGS/"
 ampngs2 = datadir + "210912_ampNGS/"
@@ -169,50 +173,43 @@ c.peak_profile_bp_resolution(c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gR
 """ (Fig. 1l) """
 # K562 FANCFs2 no drug - KU60648
 print("K562 FANCFs2")
-gen = c.gen_subtract_approx(c.blender_gen(K562_Fs2_nD_r1_c2_txt, 2000, hg19, gRNA_Fs2),
-                            c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2))
-[g[0] for g in gen]
-gen = c.gen_subtract_approx(c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2),
-                            c.blender_gen(K562_Fs2_nD_r1_c2_txt, 2000, hg19, gRNA_Fs2))
-[g[0] for g in gen]
+a1 = [g[0] for g in c.gen_subtr_exact(c.blender_gen(K562_Fs2_nD_r1_c2_txt, 2000, hg19, gRNA_Fs2),
+                                      c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2))]
+a2 = [g[0] for g in c.gen_subtr_exact(c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2),
+                                      c.blender_gen(K562_Fs2_nD_r1_c2_txt, 2000, hg19, gRNA_Fs2))]
 
 # VEGFAs2 no drug - KU60648
 print("K562 VEGFAs2")
-gen = c.gen_subtract_approx(c.blender_gen(K562_Vs2_nD_r1_c2_txt, 2000, hg19, gRNA_Vs2),
-                            c.blender_gen(K562_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2))
-[g[0] for g in gen]
-gen = c.gen_subtract_approx(c.blender_gen(K562_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2),
-                            c.blender_gen(K562_Vs2_nD_r1_c2_txt, 2000, hg19, gRNA_Vs2))
-[g[0] for g in gen]
+a3 = [g[0] for g in c.gen_subtr_exact(c.blender_gen(K562_Vs2_nD_r1_c2_txt, 2000, hg19, gRNA_Vs2),
+                                      c.blender_gen(K562_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2))]
+a4 = [g[0] for g in c.gen_subtr_exact(c.blender_gen(K562_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2),
+                                      c.blender_gen(K562_Vs2_nD_r1_c2_txt, 2000, hg19, gRNA_Vs2))]
 
 # HEK VEGFAs3 no drug - KU60648
 print("HEK VEGFAs3")
-gen = c.gen_subtract_approx(c.blender_gen(HEK_Vs3_nD_r1_c2_txt, 2000, hg19, gRNA_Vs3),
-                            c.blender_gen(HEK_Vs3_KU_r1_c2_txt, 2000, hg19, gRNA_Vs3))
-[g[0] for g in gen]
-gen = c.gen_subtract_approx(c.blender_gen(HEK_Vs3_KU_r1_c2_txt, 2000, hg19, gRNA_Vs3),
-                            c.blender_gen(HEK_Vs3_nD_r1_c2_txt, 2000, hg19, gRNA_Vs3))
-[g[0] for g in gen]
+
+a5 = [g[0] for g in c.gen_subtr_exact(c.blender_gen(HEK_Vs3_nD_r1_c2_txt, 2000, hg19, gRNA_Vs3),
+                                      c.blender_gen(HEK_Vs3_KU_r1_c2_txt, 2000, hg19, gRNA_Vs3))]
+a6 = [g[0] for g in c.gen_subtr_exact(c.blender_gen(HEK_Vs3_KU_r1_c2_txt, 2000, hg19, gRNA_Vs3),
+                                      c.blender_gen(HEK_Vs3_nD_r1_c2_txt, 2000, hg19, gRNA_Vs3))]
 
 # HEK HEKs4 no drug - KU60648
 print("HEK HEKs4")
-gen = c.gen_subtract_approx(c.blender_gen(HEK_Hs4_nD12_r1_c2_txt, 2000, hg19, gRNA_Hs4),
-                            c.blender_gen(HEK_Hs4_KU12_r1_c2_txt, 2000, hg19, gRNA_Hs4))
-[g[0] for g in gen]
-gen = c.gen_subtract_approx(c.blender_gen(HEK_Hs4_KU12_r1_c2_txt, 2000, hg19, gRNA_Hs4),
-                            c.blender_gen(HEK_Hs4_nD12_r1_c2_txt, 2000, hg19, gRNA_Hs4))
-[g[0] for g in gen]
+a7 = [g[0] for g in c.gen_subtr_exact(c.blender_gen(HEK_Hs4_nD12_r1_c2_txt, 2000, hg19, gRNA_Hs4),
+                                      c.blender_gen(HEK_Hs4_KU12_r1_c2_txt, 2000, hg19, gRNA_Hs4))]
+a8 = [g[0] for g in c.gen_subtr_exact(c.blender_gen(HEK_Hs4_KU12_r1_c2_txt, 2000, hg19, gRNA_Hs4),
+                                      c.blender_gen(HEK_Hs4_nD12_r1_c2_txt, 2000, hg19, gRNA_Hs4))]
 
 
 """ ############################################################################################ """
 """ nature16525 is Kleinstiver et al., 2016 | nbt3117 is Tsai et al., 2015 """
 """ aav9023 is Wienert/Wyman et al., 2020 """
 print("K562 FANCFs2 comparison to Kleinstiver et al.")
-gen = c.gen_subtract_approx(c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2),
-                            c.nature16525_gen(gRNA_Fs2))
+gen = c.gen_subtr_approx(c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2),
+                         c.nature16525_gen(gRNA_Fs2))
 c.save_gen(gen, ana_3 + "Vs2_KU_DseqP-Gseq")
-gen = c.gen_subtract_approx(c.nature16525_gen(gRNA_Fs2),
-                            c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2))
+gen = c.gen_subtr_approx(c.nature16525_gen(gRNA_Fs2),
+                         c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2))
 c.save_gen(gen, ana_3 + "Vs2_KU_Gseq-DseqP")
 gen = c.gen_union_approx(c.blender_gen(K562_Fs2_KU_r1_c2_txt, 2000, hg19, gRNA_Fs2),
                          c.nature16525_gen(gRNA_Fs2))
@@ -222,28 +219,63 @@ gen = c.gen_union_approx(c.blender_gen(K562_Fs2_nD_r1_c2_txt, 2000, hg19, gRNA_F
 c.save_gen(gen, ana_3 + "Vs2_nD_DseqP-U-Gseq")
 
 print("K562 VEGFAs2 comparison to Tsai et al.")
-gen = c.gen_subtract_approx(c.blender_gen(K562_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2),
-                            c.nbt3117_gen(gRNA_Vs2))
-[g[0] for g in gen]
-gen = c.gen_subtract_approx(c.nbt3117_gen(gRNA_Vs2),
-                            c.blender_gen(K562_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2))
-[g[0] for g in gen]
+b1 = [g[0] for g in c.gen_subtr_approx(c.blender_gen(K562_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2),
+                                       c.nbt3117_gen(gRNA_Vs2), approx=500)]
+b2 = [g[0] for g in c.gen_subtr_approx(c.nbt3117_gen(gRNA_Vs2),
+                                       c.blender_gen(K562_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2),
+                                       approx=500)]
 
 print("Mouse PCSK9 pooled nD comparison to KU")
-gen = c.gen_subtract_exact(c.blender_gen(mm10_mP9_nD_merge_txt, 2000, mm10, gRNA_mP9),
-                           c.blender_gen(mm10_mP9_KU_merge_txt, 2000, mm10, gRNA_mP9))
-[g[0] for g in gen]
-gen = c.gen_subtract_exact(c.blender_gen(mm10_mP9_KU_merge_txt, 2000, mm10, gRNA_mP9),
-                           c.blender_gen(mm10_mP9_nD_merge_txt, 2000, mm10, gRNA_mP9))
-[g[0] for g in gen]
+b3 = [g[0] for g in c.gen_subtr_exact(c.blender_gen(mm10_mP9_nD_merge_txt, 2000, mm10, gRNA_mP9),
+                                      c.blender_gen(mm10_mP9_KU_merge_txt, 2000, mm10, gRNA_mP9))]
+b4 = [g[0] for g in c.gen_subtr_exact(c.blender_gen(mm10_mP9_KU_merge_txt, 2000, mm10, gRNA_mP9),
+                                      c.blender_gen(mm10_mP9_nD_merge_txt, 2000, mm10, gRNA_mP9))]
 
 print("Mouse PCSK9 pooled nD comparison to pooled Wienert/Wyman et al.")
-gen = c.gen_subtract_approx(c.blender_gen(mm10_mP9_nD_merge_txt, 2000, mm10, gRNA_mP9),
-                            c.aav9023_gen(gRNA_mP9, choice=0), approx=500)
-[g[0] for g in gen]
-gen = c.gen_subtract_approx(c.aav9023_gen(gRNA_mP9, choice=0),
-                            c.blender_gen(mm10_mP9_nD_merge_txt, 2000, mm10, gRNA_mP9), approx=200)
-[g[0] for g in gen]
+b5 = [g[0] for g in c.gen_subtr_approx(c.blender_gen(mm10_mP9_nD_merge_txt, 2000, mm10, gRNA_mP9),
+                                       c.aav9023_gen(gRNA_mP9, choice=0))]
+b6 = [g[0] for g in c.gen_subtr_approx(c.aav9023_gen(gRNA_mP9, choice=0),
+                                       c.blender_gen(mm10_mP9_nD_merge_txt, 2000, mm10, gRNA_mP9))]
+
+print("Mouse PCSK9 rep3 nD comparison to KU")
+c1 = [g[0] for g in c.gen_subtr_exact(c.blender_gen(mm10_mP9_nD_r3_c2_txt, 2000, mm10, gRNA_mP9),
+                                      c.blender_gen(mm10_mP9_KU_r3_c2_txt, 2000, mm10, gRNA_mP9))]
+c2 = [g[0] for g in c.gen_subtr_exact(c.blender_gen(mm10_mP9_KU_r3_c2_txt, 2000, mm10, gRNA_mP9),
+                                      c.blender_gen(mm10_mP9_nD_r3_c2_txt, 2000, mm10, gRNA_mP9))]
+
+print("Mouse PCSK9 rep3 nD comparison to individual Wienert/Wyman et al.")
+c3 = [g[0] for g in c.gen_subtr_approx(c.blender_gen(mm10_mP9_nD_r3_c2_txt, 2000, mm10, gRNA_mP9),
+                                       c.aav9023_gen(gRNA_mP9, choice=1))]
+c4 = [g[0] for g in c.gen_subtr_approx(c.aav9023_gen(gRNA_mP9, choice=1),
+                                       c.blender_gen(mm10_mP9_nD_r3_c2_txt, 2000, mm10, gRNA_mP9))]
+
+print("Mouse PCSK9 rep3 KU comparison to individual Wienert/Wyman et al.")
+c5 = [g[0] for g in c.gen_subtr_approx(c.blender_gen(mm10_mP9_KU_r3_c2_txt, 2000, mm10, gRNA_mP9),
+                                       c.aav9023_gen(gRNA_mP9, choice=1))]
+c6 = [g[0] for g in c.gen_subtr_approx(c.aav9023_gen(gRNA_mP9, choice=1),
+                                       c.blender_gen(mm10_mP9_KU_r3_c2_txt, 2000, mm10, gRNA_mP9))]
+
+print("Mouse PCSK9 individual Wienert/Wyman SUBTRACT rep3 KU UNION rep3 nD")
+d1 = [g[0] for g in c.gen_subtr_approx(c.aav9023_gen(gRNA_mP9, choice=1),
+                                       c.gen_union_approx(c.blender_gen(mm10_mP9_KU_r3_c2_txt,
+                                                                        2000, mm10, gRNA_mP9),
+                                                          c.blender_gen(mm10_mP9_nD_r3_c2_txt,
+                                                                        2000, mm10, gRNA_mP9)))]
+print("Mouse PCSK9 rep3 KU SUBTRACT individual Wienert/Wyman UNION rep3 nD")
+d2 = [g[0] for g in c.gen_subtr_approx(c.blender_gen(mm10_mP9_KU_r3_c2_txt, 2000, mm10, gRNA_mP9),
+                                       c.gen_union_approx(c.aav9023_gen(gRNA_mP9, choice=1),
+                                                          c.blender_gen(mm10_mP9_nD_r3_c2_txt,
+                                                                        2000, mm10, gRNA_mP9)))]
+print("Mouse PCSK9 rep3 nD SUBTRACT individual Wienert/Wyman UNION rep3 KU")
+d3 = [g[0] for g in c.gen_subtr_approx(c.blender_gen(mm10_mP9_nD_r3_c2_txt, 2000, mm10, gRNA_mP9),
+                                       c.gen_union_approx(c.aav9023_gen(gRNA_mP9, choice=1),
+                                                          c.blender_gen(mm10_mP9_KU_r3_c2_txt,
+                                                                        2000, mm10, gRNA_mP9)))]
+print("Mouse PCSK9 rep3 nD SUBTRACT individual Wienert/Wyman INTERSECTION rep3 KU")
+d4 = [g[0] for g in c.gen_inter_approx(c.blender_gen(mm10_mP9_nD_r3_c2_txt, 2000, mm10, gRNA_mP9),
+                                       c.gen_inter_approx(c.aav9023_gen(gRNA_mP9, choice=1),
+                                                          c.blender_gen(mm10_mP9_KU_r3_c2_txt,
+                                                                        2000, mm10, gRNA_mP9)))]
 
 
 """ ############################################################################################ """

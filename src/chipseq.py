@@ -634,7 +634,7 @@ def save_gen(gen, fileout):
     np.savetxt(fileout + "_savegen.csv", np.asarray(outa), fmt='%s', delimiter=',', header=head)
 
 
-def gen_subtract_exact(gen1, gen2):
+def gen_subtr_exact(gen1, gen2):
     """ Outputs generator for set of target sites from gen1, subtracted by gen2.
     :param gen1: generator that outputs target sites in the following tuple format:
                 ( span_rs   =   region string in "chr1:100-200" format, centered at cut site
@@ -663,7 +663,7 @@ def gen_subtract_exact(gen1, gen2):
     print("# of target sites | gen1: %i | gen2: %i | gen1-gen2: %i" % (count1, count2, countdiff))
 
 
-def gen_subtract_approx(gen1, gen2, approx=1000):
+def gen_subtr_approx(gen1, gen2, approx=1):
     """ Outputs generator for set of target sites from gen1, subtracted by gen2.
     :param gen1: generator that outputs target sites in the following tuple format:
                 ( span_rs   =   region string in "chr1:100-200" format, centered at cut site
@@ -697,7 +697,36 @@ def gen_subtract_approx(gen1, gen2, approx=1000):
     print("# of target sites | gen1: %i | gen2: %i | gen1-gen2: %i" % (count1, count2, countdiff))
 
 
-def gen_union_approx(gen1, gen2, approx=1000):
+def gen_inter_approx(gen1, gen2, approx=1):
+    """ Outputs generator for set of target sites that is intersection of gen1 and gen2
+    :param gen1: generator that outputs target sites in the following tuple format:
+                ( span_rs   =   region string in "chr1:100-200" format, centered at cut site
+                  cut_i     =   cut site                 (int)
+                  sen_i     =   sense/antisense          (+/- str)
+                  pam_i     =   PAM                      (str)
+                  gui_i     =   genomic target sequence  (str)
+                  mis_i     =   # mismatches             (int)
+                  guide     =   intended target sequence (str)
+                  val_i     =   enrichment value         (int)
+    :param gen2: same format as gen1
+    :param approx: max distance in coordinates between cut sites to be counted as the same one
+    :return: generator for set of target sites that is the intersection of gen1 and gen2
+    """
+    countuni = 0
+    list1, list2 = list(gen1), list(gen2)
+    for g1 in list1:
+        cutloc_1 = (re.split('[:-]', g1[0])[0], g1[1])
+        for g2 in list2:
+            cutloc_2 = (re.split('[:-]', g2[0])[0], g2[1])
+            if cutloc_1[0] == cutloc_2[0] and abs(cutloc_1[1] - cutloc_2[1]) <= approx:
+                countuni += 1
+                yield g2
+                break
+    count1, count2 = len(list1), len(list2)
+    print("# of target sites | gen1: %i | gen2: %i | gen1 I gen2: %i" % (count1, count2, countuni))
+
+
+def gen_union_approx(gen1, gen2, approx=1):
     """ Outputs generator for set of target sites that is union of gen1 and gen2
     :param gen1: generator that outputs target sites in the following tuple format:
                 ( span_rs   =   region string in "chr1:100-200" format, centered at cut site
@@ -712,16 +741,24 @@ def gen_union_approx(gen1, gen2, approx=1000):
     :param approx: max distance in coordinates between cut sites to be counted as the same one
     :return: generator for set of target sites that is the union of gen1 and gen2
     """
-    countuni = 0
+    gen2list = []
     list1, list2 = list(gen1), list(gen2)
+    countuni = 0
+    for g2 in list2:
+        cutloc_i = (re.split('[:-]', g2[0])[0], g2[1])
+        gen2list.append(cutloc_i)
+        countuni += 1
+        yield g2
     for g1 in list1:
         cutloc_1 = (re.split('[:-]', g1[0])[0], g1[1])
-        for g2 in list2:
-            cutloc_2 = (re.split('[:-]', g2[0])[0], g2[1])
+        in_2 = False
+        for cutloc_2 in gen2list:
             if cutloc_1[0] == cutloc_2[0] and abs(cutloc_1[1] - cutloc_2[1]) <= approx:
-                countuni += 1
-                yield g2
+                in_2 = True
                 break
+        if not in_2:
+            countuni += 1
+            yield g1
     count1, count2 = len(list1), len(list2)
     print("# of target sites | gen1: %i | gen2: %i | gen1 U gen2: %i" % (count1, count2, countuni))
 
