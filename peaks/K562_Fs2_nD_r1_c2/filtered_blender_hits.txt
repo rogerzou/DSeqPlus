@@ -1,0 +1,3 @@
+Chr:Start-End	Cutsite	Discoscore	Cutsite Ends	Strand	PAM	Guide sequence	Mismatches
+chr11:22647338-22647357	22647354	116	90	sense	NGG	GCTGCAGAAGGGATTCCATG	0
+chr22:36952998-36953017	36953000	8	7	antisense	NGG	GCTGCAGAAGGGATTCCAAG	1
