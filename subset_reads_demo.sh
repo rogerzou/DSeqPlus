@@ -4,12 +4,11 @@
 # Enter paths to all samples for processing into this array
 
 declare -a filelist1=(\
-  "demo/mPCSK9_nd24h_r3" \
-  "demo/mPCSK9_KU24h_r3" \
+  "/mnt/c/Users/rzou4/Downloads/demo/mm_mP9_nD24h_r3" \
+  "/mnt/c/Users/rzou4/Downloads/demo/mm_mP9_KU24h_r3" \
 )
 
 ##########################################
-
 
 # processing arguments, proceed with bioinformatics pipeline
 main() {

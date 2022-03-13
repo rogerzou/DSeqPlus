@@ -2,38 +2,41 @@
 
 ########### USER ENTRY SECTION ###########
 # Enter paths to all samples for processing into this array
+sra_path=/mnt/c/Users/rzou4/Downloads/SRA_download/
+
 declare -a filelist=(\
-#  "/mnt/d/210216_Dseq+/A04_sub" \
-#  "/mnt/d/210216_Dseq+/A05_sub" \
-#  "/mnt/d/210216_Dseq+/A06_sub" \
-#  "/mnt/d/210216_Dseq+/A10_sub" \
-#  "/mnt/d/210216_Dseq+/A11_sub" \
-#  "/mnt/d/210216_Dseq+/A12_sub" \
-#  "/mnt/d/210216_Dseq+/A13_sub" \
-#  "/mnt/d/210216_Dseq+/A14_sub" \
-#  "/mnt/d/210216_Dseq+/A15_sub" \
-#  "/mnt/d/210216_Dseq+/A17_sub" \
-#  "/mnt/d/210216_Dseq+/A20_sub" \
-#  "/mnt/d/210301_Dseq+/A13_sub" \
-#  "/mnt/d/210301_Dseq+/A14_sub" \
-#  "/mnt/d/210301_Dseq+/A15_sub" \
-#  "/mnt/d/210301_Dseq+/A16_sub" \
-#  "/mnt/d/210301_Dseq+/A17_sub" \
-#  "/mnt/d/210301_Dseq+/A18_sub" \
-#  "/mnt/d/210301_Dseq+/A19" \
-#  "/mnt/d/210301_Dseq+/A20" \
-#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A05_mPCSK9_nd24h_r4_sub" \
-#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A06_mPCSK9_KU24h_r4_sub" \
-#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A08_mPCSK9_nd24h_r2_sub" \
-#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A11_mPCSK9_KU24h_r2_sub" \
-#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A09_mPCSK9_nd24h_r3_sub" \
-#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A12_mPCSK9_KU24h_r3_sub" \
-#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A02_mPCSK9_nd24h_r0_sub" \
-#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A03_mPCSK9_KU24h_r0_sub" \
-#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A07_mPCSK9_nd24h_r1_sub" \
-#  "/mnt/c/Users/rzou4/Desktop/211213_Dseq+/A10_mPCSK9_KU24h_r1_sub" \
-#  "/mnt/c/Users/rzou4/Downloads/SRR8553804" \
-#  "/mnt/c/Users/rzou4/Downloads/SRR8553806" \
+"HEK_WT"
+"HEK_Vs3_nD12h_sub"
+"HEK_Vs3_NU12h_sub"
+"HEK_Vs3_KU12h_sub"
+#"HEK_Vs2_nD12h_sub"
+#"HEK_Vs2_KU12h_sub"
+#"HEK_Hs4_nD04h_sub"
+#"HEK_Hs4_nD24h_sub"
+#"HEK_Hs4_nD12h_sub"
+#"HEK_Hs4_KU04h_sub"
+#"HEK_Hs4_KU24h_sub"
+#"HEK_Hs4_KU12h_sub"
+#"iPSC_Vs2_nD12h_sub"
+#"iPSC_Vs2_KU12h_sub"
+#"K562_WT"
+#"K562_Vs2_nD12h_sub"
+#"K562_Vs2_KU12h_sub"
+#"K562_Fs2_nD12h_sub"
+#"K562_Fs2_KU12h_sub"
+#"mm_mP9_nD24h_r4_sub"
+#"mm_mP9_nD24h_r3_sub"
+#"mm_mP9_nD24h_r2_sub"
+#"mm_mP9_nD24h_r1_sub"
+#"mm_mP9_nD24h_r0_sub"
+#"mm_mP9_KU24h_r4_sub"
+#"mm_mP9_KU24h_r3_sub"
+#"mm_mP9_KU24h_r2_sub"
+#"mm_mP9_KU24h_r1_sub"
+#"mm_mP9_KU24h_r0_sub"
+#"mm_GFP_KU24h"
+#"mm_negctrl_r1"
+#"mm_negctrl_r2"
 )
 
 # Enter path to indexed genome
@@ -41,8 +44,8 @@ hg38path="/mnt/c/Users/Roger/bioinformatics/hg38_bowtie2/hg38"
 hg19path="/mnt/c/Users/Roger/bioinformatics/hg19_bowtie2/hg19"
 # mm10path="/mnt/c/Users/Roger/bioinformatics/mm10_bowtie2/mm10"
 mm10path="/home/roger/bioinformatics/mm10/mm10"
-##########################################
 
+##########################################
 
 # processing arguments, proceed with bioinformatics pipeline
 main() {
@@ -76,9 +79,10 @@ main() {
   done
 }
 
-
 # main bioinformatics pipeline (alignment to indexing and read statistics)
 align2bam() {
+
+  cd $sra_path
 
   # Align reads to either hg38 or mm10 using bowtie2
   bowtie2 -p 6 -q --local -X 1000 -x $1 \

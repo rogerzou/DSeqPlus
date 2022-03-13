@@ -3,15 +3,14 @@
 ########### USER ENTRY SECTION ###########
 # Enter paths to all samples for processing into this array
 declare -a filelist=(\
-  "demo/mPCSK9_nd24h_r3_sub" \
-  "demo/mPCSK9_KU24h_r3_sub" \
-  "demo/negctrl_r1" \
+  "/mnt/c/Users/rzou4/Downloads/demo/mm_mP9_nD24h_r3_sub" \
+  "/mnt/c/Users/rzou4/Downloads/demo/mm_mP9_KU24h_r3_sub" \
+  "/mnt/c/Users/rzou4/Downloads/demo/mm_negctrl_r1" \
 )
 
 # Enter path to indexed genome
 mm10path="/home/roger/bioinformatics/mm10/mm10"
 ##########################################
-
 
 # processing arguments, proceed with bioinformatics pipeline
 main() {
@@ -25,7 +24,6 @@ main() {
     align2bam ${genomepath} ${file} ${genome} &
   done
 }
-
 
 # main bioinformatics pipeline (alignment to indexing and read statistics)
 align2bam() {
