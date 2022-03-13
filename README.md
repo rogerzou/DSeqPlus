@@ -23,7 +23,7 @@ Custom analysis software for DISCOVER-Seq+
     - [Human hg19](https://genome-idx.s3.amazonaws.com/bt/hg19.zip)
     - [Mouse mm10](https://genome-idx.s3.amazonaws.com/bt/mm10.zip)
     - Extract from archive, move to the corresponding folders named `hg38_bowtie2/`,`hg19_bowtie2/`, or `mm10_bowtie2/`
-2. Download two human hg19 and hg38 genome assemblies in FASTA format
+2. Download genome assemblies in FASTA format
     - [hg38.fa](https://hgdownload.cse.ucsc.edu/goldenpath/hg38/bigZips/hg38.fa.gz)
     - [hg19.fa](http://hgdownload.cse.ucsc.edu/goldenPath/hg19/bigZips/hg19.fa.gz)
     - [mm10.fa](https://hgdownload.soe.ucsc.edu/goldenPath/mm10/bigZips/mm10.fa.gz)
@@ -43,14 +43,14 @@ Ubuntu, Intel i7-8700k 3.7 GHz 6 cores, 32GB RAM.
 download the sequencing data. For the consistency of this demo, I will use `/mnt/c/Users/rzou4/Downloads/`. 
 3. Run `download_reads_demo.sh` on command line, which will download the relevant FASTQ files from 
 the public database, rename the files appropriately, and move files to newly created `demo` folder 
-within `/mnt/c/Users/rzou4/Downloads/` (est. time <10 min/file).
+within `/mnt/c/Users/rzou4/Downloads/` *(est. time <10 min/file)*.
 4. Open `subset_reads_demo.sh`, go to "User Entry Section", ensure the paths are correct. 
 5. Run `subset_reads_demo.sh`, which will subset the relevant FASTQ files to ensure equal # of 
-sequencing reads between DISCOVER-Seq+ and DISCOVER-Seq, for fair comparison (est. time 1 min/file).
+sequencing reads between DISCOVER-Seq+ and DISCOVER-Seq, for fair comparison *(est. time 1 min/file)*.
 6. Open `process_reads_demo.sh`, go to "User Entry Section", enter the directory which has the 
 mm10 genome previously installed via the Installation Guide.
 7. Run `process_reads_demo.sh`, which will use `bowtie2` to align the files to the mouse mm10 genome, 
-followed by `samtools` for further processing before conversion to indexed BAM files (est. time 12 hours/file).
+followed by `samtools` for further processing before conversion to indexed BAM files *(est. time 12 hours/file)*.
 Performs processing on all 3 samples in parallel.
 8. Open `blender_c3_demo.sh`, go to "User Entry Section", enter the paths to 
 (1) BLENDER software, (2) mm10 genome, and (3-4) path to new output folders.
@@ -62,7 +62,7 @@ DISCOVER-Seq+ versus DISCOVER-Seq (est. time 3 days/file). Performs processing o
 
 ## Usage instructions
 Similar to instructions listed in the Demo, but more general and applicable to all data sets.
-The list of sequencing datasets is listed [here](https://www.ncbi.nlm.nih.gov/Traces/study/?acc=SRP362082&o=acc_s%3Aa)
+The list of sequencing datasets is listed [here](https://www.ncbi.nlm.nih.gov/Traces/study/?acc=SRP362082&o=acc_s%3Aa).
 #### `download_reads.sh` downloads the desired FASTQ sequencing reads from Sequencing Read Archive (SRA) (est. time 10 min/file), parallelizable
 1. Open `download_reads.sh`, which has the list of FASTQ datasets to download, of format 
 `SRR********`, such as `SRR18188706`, along with its corresponding name: `mm_mP9_KU24h_r3`. Enter 
@@ -83,8 +83,9 @@ are the same ones previously downloaded in `download_reads.sh`, some of which we
 Also, enter valid paths to the downloaded genomes
 6. Run `process_reads.sh` to use `bowtie2` to align the files to the mouse mm10 genome, followed by 
 `samtools` for further processing before conversion to indexed BAM files.
-7. Shell file of type `blender_*_xxxx_cc.sh` are used to perform 
-[BLENDER](https://github.com/staciawyman/blender). `*` indicates sequencing file dataset,
+#### `blender_*_xxxx_cc.sh` determines genome-wide off-target sites using [BLENDER](https://github.com/staciawyman/blender) (est. time 1-3 days/file), parallelizable
+7. Shell file of type `blender_*_xxxx_cc.sh`. `*` indicates sequencing file dataset,
 `xxxx` indicates genome (`hg19` or `mm10`), and `cc` indicates either `c2` or `c3` BLENDER parameter.
-8. A Python script `script_1.py` is used to perform downstream analysis, generating the majority
-of the data and results presented in the associated manuscript.
+8. Modify `blender_*_xxxx_cc.sh` appropriately for compatibility with your desired datasets, and run.
+#### `script_1.py` perform downstream analysis, generating the majority of the data and results presented in the associated manuscript
+9. Modify `script_1.py` appropriately for compatibility with your desired datasets, and run.
