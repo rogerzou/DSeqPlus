@@ -2,7 +2,9 @@
 
 ########### USER ENTRY SECTION ###########
 # Enter paths to all samples for processing into this array
-sra_path=/mnt/c/Users/rzou4/Downloads/SRA_download/
+#sra_path=/mnt/c/Users/rzou4/Downloads/SRA_download/
+#sra_path=/mnt/d/220701_Dseq+/
+sra_path=/mnt/d/220714_Dseq+/
 
 declare -a filelist01=(\
   "HEK_Vs3_nD12h" \
@@ -54,9 +56,58 @@ declare -a filelist11=(\
   "mm_mP9_KU24h_r1" \
 )
 
+declare -a filelist12=(\
+  "Tcell_Cas9_g_KU_L1" \
+  "Tcell_Cas9_g_KU_L2" \
+  "Tcell_Cas9_g_nD_L1" \
+  "Tcell_Cas9_g_nD_L2" \
+)
+
+declare -a filelist13=(\
+  "Tcell_Cas9_ng_KU_L1" \
+  "Tcell_Cas9_ng_KU_L2" \
+  "Tcell_Cas9_ng_nD_L1" \
+  "Tcell_Cas9_ng_nD_L2" \
+)
+
+declare -a filelist14=(\
+  "Tcell_Cpf1_g_KU_L1" \
+  "Tcell_Cpf1_g_KU_L2" \
+  "Tcell_Cpf1_g_nD_L1" \
+  "Tcell_Cpf1_g_nD_L2" \
+)
+
+declare -a filelist15=(\
+  "Tcell_Cpf1_ng_KU_L1" \
+  "Tcell_Cpf1_ng_KU_L2" \
+  "Tcell_Cpf1_ng_nD_L1" \
+  "Tcell_Cpf1_ng_nD_L2" \
+)
+
+declare -a filelist16=(\
+  "Tcell_Cas9_g_KU_r2" \
+  "Tcell_Cas9_g_nD_r2" \
+  "Tcell_Cas9_g_nD_NT-HDRT" \
+)
+
+declare -a filelist17=(\
+  "Tcell_Cas9_ng_KU_r2" \
+  "Tcell_Cas9_ng_nD_r2" \
+)
+
+declare -a filelist18=(\
+  "Tcell_Cpf1_g_KU_r2" \
+  "Tcell_Cpf1_g_nD_r2" \
+)
+
+declare -a filelist19=(\
+  "Tcell_Cpf1_ng_KU_r2" \
+  "Tcell_Cpf1_ng_nD_r2" \
+)
+
 # processing arguments, proceed with bioinformatics pipeline
 main() {
-  subsetfastq "${filelist01[@]}"
+#  subsetfastq "${filelist01[@]}"
 #  subsetfastq "${filelist02[@]}"
 #  subsetfastq "${filelist03[@]}"
 #  subsetfastq "${filelist04[@]}"
@@ -67,6 +118,14 @@ main() {
 #  subsetfastq "${filelist09[@]}"
 #  subsetfastq "${filelist10[@]}"
 #  subsetfastq "${filelist11[@]}"
+#  subsetfastq "${filelist12[@]}"
+#  subsetfastq "${filelist13[@]}"
+#  subsetfastq "${filelist14[@]}"
+#  subsetfastq "${filelist15[@]}"
+  subsetfastq "${filelist16[@]}"
+  subsetfastq "${filelist17[@]}"
+  subsetfastq "${filelist18[@]}"
+  subsetfastq "${filelist19[@]}"
 }
 
 ##########################################

@@ -1,10 +1,7 @@
 """
 Script for:
-(1)
+(2)
 """
-from Bio import SeqIO
-import src.amplicon as amp
-import src.getgenome as gg
 import src.chipseq as c
 import sys
 import os
@@ -65,10 +62,10 @@ a2 = [g[0] for g in c.gen_subtr_exact(c.blender_gen(K562_Fs2_KU_r1_c3_txt, 2000,
 
 # VEGFAs2 no drug - KU60648
 print("K562 VEGFAs2")
-a3 = [g[0] for g in c.gen_subtr_exact(c.blender_gen(K562_Vs2_nD_r1_c3_txt, 2000, hg19, gRNA_Vs2),
-                                      c.blender_gen(K562_Vs2_KU_r1_c3_txt, 2000, hg19, gRNA_Vs2))]
 a4 = [g[0] for g in c.gen_subtr_exact(c.blender_gen(K562_Vs2_KU_r1_c3_txt, 2000, hg19, gRNA_Vs2),
                                       c.blender_gen(K562_Vs2_nD_r1_c3_txt, 2000, hg19, gRNA_Vs2))]
+a3 = [g[0] for g in c.gen_subtr_exact(c.blender_gen(K562_Vs2_nD_r1_c3_txt, 2000, hg19, gRNA_Vs2),
+                                      c.blender_gen(K562_Vs2_KU_r1_c3_txt, 2000, hg19, gRNA_Vs2))]
 
 # HEK VEGFAs3 no drug - KU60648
 print("HEK VEGFAs3")

@@ -97,3 +97,89 @@ flash -M 300 -o merged/Fs2_OFF9_ep3  raw/EP3_9_S45_R1_001.fastq  raw/EP3_9_S45_R
 flash -M 300 -o merged/Fs2_OFF10_ep3  raw/EP3_10_S46_R1_001.fastq  raw/EP3_10_S46_R2_001.fastq  | tee flash-stats.txt
 flash -M 300 -o merged/Fs2_OFF11_ep3  raw/EP3_11_S47_R1_001.fastq  raw/EP3_11_S47_R2_001.fastq  | tee flash-stats.txt
 flash -M 300 -o merged/Fs2_OFF12_ep3  raw/EP3_12_S48_R1_001.fastq  raw/EP3_12_S48_R2_001.fastq  | tee flash-stats.txt
+
+
+cd /Volumes/Lab-Home/rzou4/NGS_data/4_damage/220817_ampNGS/
+mkdir -p merged
+
+flash -M 300 -o merged/Fs2_OFF0_ku1  raw/Fs2-R1-00_S2_L001_R1_001.fastq  raw/Fs2-R1-00_S2_L001_R2_001.fastq  | tee Fs2_ku1_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF1_ku1  raw/Fs2-R1-01_S3_L001_R1_001.fastq  raw/Fs2-R1-01_S3_L001_R2_001.fastq  | tee -a Fs2_ku1_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF2_ku1  raw/Fs2-R1-02_S4_L001_R1_001.fastq  raw/Fs2-R1-02_S4_L001_R2_001.fastq  | tee -a Fs2_ku1_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF3_ku1  raw/Fs2-R1-03_S5_L001_R1_001.fastq  raw/Fs2-R1-03_S5_L001_R2_001.fastq  | tee -a Fs2_ku1_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF4_ku1  raw/Fs2-R1-04_S6_L001_R1_001.fastq  raw/Fs2-R1-04_S6_L001_R2_001.fastq  | tee -a Fs2_ku1_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF5_ku1  raw/Fs2-R1-05_S7_L001_R1_001.fastq  raw/Fs2-R1-05_S7_L001_R2_001.fastq  | tee -a Fs2_ku1_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF7_ku1  raw/Fs2-R1-07_S8_L001_R1_001.fastq  raw/Fs2-R1-07_S8_L001_R2_001.fastq  | tee -a Fs2_ku1_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF8_ku1  raw/Fs2-R1-08_S9_L001_R1_001.fastq  raw/Fs2-R1-08_S9_L001_R2_001.fastq  | tee -a Fs2_ku1_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF9_ku1  raw/Fs2-R1-09_S10_L001_R1_001.fastq  raw/Fs2-R1-09_S10_L001_R2_001.fastq  | tee -a Fs2_ku1_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF10_ku1  raw/Fs2-R1-10_S11_L001_R1_001.fastq  raw/Fs2-R1-10_S11_L001_R2_001.fastq  | tee -a Fs2_ku1_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF11_ku1  raw/Fs2-R1-11_S12_L001_R1_001.fastq  raw/Fs2-R1-11_S12_L001_R2_001.fastq  | tee -a Fs2_ku1_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF12_ku1  raw/Fs2-R1-12_S13_L001_R1_001.fastq  raw/Fs2-R1-12_S13_L001_R2_001.fastq  | tee -a Fs2_ku1_flash-stats.txt
+flash -M 300 -o merged/Fs2_ON_ku1  raw/Fs2-R1-ON_S1_L001_R1_001.fastq  raw/Fs2-R1-ON_S1_L001_R2_001.fastq  | tee -a Fs2_ku1_flash-stats.txt
+
+flash -M 300 -o merged/Fs2_OFF0_ku2  raw/Fs2-R2-00_S15_L001_R1_001.fastq  raw/Fs2-R2-00_S15_L001_R2_001.fastq  | tee Fs2_ku2_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF1_ku2  raw/Fs2-R2-01_S16_L001_R1_001.fastq  raw/Fs2-R2-01_S16_L001_R2_001.fastq  | tee -a Fs2_ku2_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF2_ku2  raw/Fs2-R2-02_S17_L001_R1_001.fastq  raw/Fs2-R2-02_S17_L001_R2_001.fastq  | tee -a Fs2_ku2_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF3_ku2  raw/Fs2-R2-03_S18_L001_R1_001.fastq  raw/Fs2-R2-03_S18_L001_R2_001.fastq  | tee -a Fs2_ku2_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF4_ku2  raw/Fs2-R2-04_S19_L001_R1_001.fastq  raw/Fs2-R2-04_S19_L001_R2_001.fastq  | tee -a Fs2_ku2_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF5_ku2  raw/Fs2-R2-05_S20_L001_R1_001.fastq  raw/Fs2-R2-05_S20_L001_R2_001.fastq  | tee -a Fs2_ku2_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF7_ku2  raw/Fs2-R2-07_S21_L001_R1_001.fastq  raw/Fs2-R2-07_S21_L001_R2_001.fastq  | tee -a Fs2_ku2_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF8_ku2  raw/Fs2-R2-08_S22_L001_R1_001.fastq  raw/Fs2-R2-08_S22_L001_R2_001.fastq  | tee -a Fs2_ku2_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF9_ku2  raw/Fs2-R2-09_S23_L001_R1_001.fastq  raw/Fs2-R2-09_S23_L001_R2_001.fastq  | tee -a Fs2_ku2_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF10_ku2  raw/Fs2-R2-10_S24_L001_R1_001.fastq  raw/Fs2-R2-10_S24_L001_R2_001.fastq  | tee -a Fs2_ku2_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF11_ku2  raw/Fs2-R2-11_S25_L001_R1_001.fastq  raw/Fs2-R2-11_S25_L001_R2_001.fastq  | tee -a Fs2_ku2_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF12_ku2  raw/Fs2-R2-12_S26_L001_R1_001.fastq  raw/Fs2-R2-12_S26_L001_R2_001.fastq  | tee -a Fs2_ku2_flash-stats.txt
+flash -M 300 -o merged/Fs2_ON_ku2  raw/Fs2-R2-ON_S14_L001_R1_001.fastq  raw/Fs2-R2-ON_S14_L001_R2_001.fastq  | tee -a Fs2_ku2_flash-stats.txt
+
+flash -M 300 -o merged/Fs2_OFF0_ku3  raw/Fs2-R3-00_S28_L001_R1_001.fastq  raw/Fs2-R3-00_S28_L001_R2_001.fastq  | tee Fs2_ku3_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF1_ku3  raw/Fs2-R3-01_S29_L001_R1_001.fastq  raw/Fs2-R3-01_S29_L001_R2_001.fastq  | tee -a Fs2_ku3_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF2_ku3  raw/Fs2-R3-02_S30_L001_R1_001.fastq  raw/Fs2-R3-02_S30_L001_R2_001.fastq  | tee -a Fs2_ku3_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF3_ku3  raw/Fs2-R3-03_S31_L001_R1_001.fastq  raw/Fs2-R3-03_S31_L001_R2_001.fastq  | tee -a Fs2_ku3_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF4_ku3  raw/Fs2-R3-04_S32_L001_R1_001.fastq  raw/Fs2-R3-04_S32_L001_R2_001.fastq  | tee -a Fs2_ku3_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF5_ku3  raw/Fs2-R3-05_S33_L001_R1_001.fastq  raw/Fs2-R3-05_S33_L001_R2_001.fastq  | tee -a Fs2_ku3_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF7_ku3  raw/Fs2-R3-07_S34_L001_R1_001.fastq  raw/Fs2-R3-07_S34_L001_R2_001.fastq  | tee -a Fs2_ku3_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF8_ku3  raw/Fs2-R3-08_S35_L001_R1_001.fastq  raw/Fs2-R3-08_S35_L001_R2_001.fastq  | tee -a Fs2_ku3_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF9_ku3  raw/Fs2-R3-09_S36_L001_R1_001.fastq  raw/Fs2-R3-09_S36_L001_R2_001.fastq  | tee -a Fs2_ku3_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF10_ku3  raw/Fs2-R3-10_S37_L001_R1_001.fastq  raw/Fs2-R3-10_S37_L001_R2_001.fastq | tee -a Fs2_ku3_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF11_ku3  raw/Fs2-R3-11_S38_L001_R1_001.fastq  raw/Fs2-R3-11_S38_L001_R2_001.fastq | tee -a Fs2_ku3_flash-stats.txt
+flash -M 300 -o merged/Fs2_OFF12_ku3  raw/Fs2-R3-12_S39_L001_R1_001.fastq  raw/Fs2-R3-12_S39_L001_R2_001.fastq | tee -a Fs2_ku3_flash-stats.txt
+flash -M 300 -o merged/Fs2_ON_ku3  raw/Fs2-R3-ON_S27_L001_R1_001.fastq  raw/Fs2-R3-ON_S27_L001_R2_001.fastq | tee -a Fs2_ku3_flash-stats.txt
+
+flash -M 300 -o merged/mP9_C9_OFF0_ku1  raw/mP9-C9Ku-R1-00_S50_L001_R1_001.fastq  raw/mP9-C9Ku-R1-00_S50_L001_R2_001.fastq | tee mP9_C9_ku1_flash-stats.txt
+flash -M 300 -o merged/mP9_C9_OFF1_ku1  raw/mP9-C9Ku-R1-01_S51_L001_R1_001.fastq  raw/mP9-C9Ku-R1-01_S51_L001_R2_001.fastq | tee -a mP9_C9_ku1_flash-stats.txt
+flash -M 300 -o merged/mP9_C9_OFF2_ku1  raw/mP9-C9Ku-R1-02_S52_L001_R1_001.fastq  raw/mP9-C9Ku-R1-02_S52_L001_R2_001.fastq | tee -a mP9_C9_ku1_flash-stats.txt
+flash -M 300 -o merged/mP9_C9_OFF3_ku1  raw/mP9-C9Ku-R1-03_S53_L001_R1_001.fastq  raw/mP9-C9Ku-R1-03_S53_L001_R2_001.fastq | tee -a mP9_C9_ku1_flash-stats.txt
+flash -M 300 -o merged/mP9_C9_OFF4_ku1  raw/mP9-C9Ku-R1-04_S54_L001_R1_001.fastq  raw/mP9-C9Ku-R1-04_S54_L001_R2_001.fastq | tee -a mP9_C9_ku1_flash-stats.txt
+flash -M 300 -o merged/mP9_C9_OFF5_ku1  raw/mP9-C9Ku-R1-05_S55_L001_R1_001.fastq  raw/mP9-C9Ku-R1-05_S55_L001_R2_001.fastq | tee -a mP9_C9_ku1_flash-stats.txt
+flash -M 300 -o merged/mP9_C9_OFF6_ku1  raw/mP9-C9Ku-R1-06_S56_L001_R1_001.fastq  raw/mP9-C9Ku-R1-06_S56_L001_R2_001.fastq | tee -a mP9_C9_ku1_flash-stats.txt
+flash -M 300 -o merged/mP9_C9_OFF7_ku1  raw/mP9-C9Ku-R1-07_S57_L001_R1_001.fastq  raw/mP9-C9Ku-R1-07_S57_L001_R2_001.fastq | tee -a mP9_C9_ku1_flash-stats.txt
+flash -M 300 -o merged/mP9_C9_ON_ku1  raw/mP9-C9Ku-R1-ON_S49_L001_R1_001.fastq  raw/mP9-C9Ku-R1-ON_S49_L001_R2_001.fastq | tee -a mP9_C9_ku1_flash-stats.txt
+
+flash -M 300 -o merged/mP9_C9_OFF0_ct1  raw/mP9-C9nD-R1-00_S41_L001_R1_001.fastq  raw/mP9-C9nD-R1-00_S41_L001_R2_001.fastq | tee mP9_C9_ct1_flash-stats.txt
+flash -M 300 -o merged/mP9_C9_OFF1_ct1  raw/mP9-C9nD-R1-01_S42_L001_R1_001.fastq  raw/mP9-C9nD-R1-01_S42_L001_R2_001.fastq | tee -a mP9_C9_ct1_flash-stats.txt
+flash -M 300 -o merged/mP9_C9_OFF2_ct1  raw/mP9-C9nD-R1-02_S43_L001_R1_001.fastq  raw/mP9-C9nD-R1-02_S43_L001_R2_001.fastq | tee -a mP9_C9_ct1_flash-stats.txt
+flash -M 300 -o merged/mP9_C9_OFF3_ct1  raw/mP9-C9nD-R1-03_S44_L001_R1_001.fastq  raw/mP9-C9nD-R1-03_S44_L001_R2_001.fastq | tee -a mP9_C9_ct1_flash-stats.txt
+flash -M 300 -o merged/mP9_C9_OFF4_ct1  raw/mP9-C9nD-R1-04_S45_L001_R1_001.fastq  raw/mP9-C9nD-R1-04_S45_L001_R2_001.fastq | tee -a mP9_C9_ct1_flash-stats.txt
+flash -M 300 -o merged/mP9_C9_OFF5_ct1  raw/mP9-C9nD-R1-05_S46_L001_R1_001.fastq  raw/mP9-C9nD-R1-05_S46_L001_R2_001.fastq | tee -a mP9_C9_ct1_flash-stats.txt
+flash -M 300 -o merged/mP9_C9_OFF6_ct1  raw/mP9-C9nD-R1-06_S47_L001_R1_001.fastq  raw/mP9-C9nD-R1-06_S47_L001_R2_001.fastq | tee -a mP9_C9_ct1_flash-stats.txt
+flash -M 300 -o merged/mP9_C9_OFF7_ct1  raw/mP9-C9nD-R1-07_S48_L001_R1_001.fastq  raw/mP9-C9nD-R1-07_S48_L001_R2_001.fastq | tee -a mP9_C9_ct1_flash-stats.txt
+flash -M 300 -o merged/mP9_C9_ON_ct1  raw/mP9-C9nD-R1-ON_S40_L001_R1_001.fastq  raw/mP9-C9nD-R1-ON_S40_L001_R2_001.fastq | tee -a mP9_C9_ct1_flash-stats.txt
+
+flash -M 300 -o merged/mP9_nC_OFF0_ku1  raw/mP9-Ku-R1-00_S68_L001_R1_001.fastq  raw/mP9-Ku-R1-00_S68_L001_R2_001.fastq | tee mP9_nC_ku1_flash-stats.txt
+flash -M 300 -o merged/mP9_nC_OFF1_ku1  raw/mP9-Ku-R1-01_S69_L001_R1_001.fastq  raw/mP9-Ku-R1-01_S69_L001_R2_001.fastq | tee -a mP9_nC_ku1_flash-stats.txt
+flash -M 300 -o merged/mP9_nC_OFF2_ku1  raw/mP9-Ku-R1-02_S70_L001_R1_001.fastq  raw/mP9-Ku-R1-02_S70_L001_R2_001.fastq | tee -a mP9_nC_ku1_flash-stats.txt
+flash -M 300 -o merged/mP9_nC_OFF3_ku1  raw/mP9-Ku-R1-03_S71_L001_R1_001.fastq  raw/mP9-Ku-R1-03_S71_L001_R2_001.fastq | tee -a mP9_nC_ku1_flash-stats.txt
+flash -M 300 -o merged/mP9_nC_OFF4_ku1  raw/mP9-Ku-R1-04_S72_L001_R1_001.fastq  raw/mP9-Ku-R1-04_S72_L001_R2_001.fastq | tee -a mP9_nC_ku1_flash-stats.txt
+flash -M 300 -o merged/mP9_nC_OFF5_ku1  raw/mP9-Ku-R1-05_S73_L001_R1_001.fastq  raw/mP9-Ku-R1-05_S73_L001_R2_001.fastq | tee -a mP9_nC_ku1_flash-stats.txt
+flash -M 300 -o merged/mP9_nC_OFF6_ku1  raw/mP9-Ku-R1-06_S74_L001_R1_001.fastq  raw/mP9-Ku-R1-06_S74_L001_R2_001.fastq | tee -a mP9_nC_ku1_flash-stats.txt
+flash -M 300 -o merged/mP9_nC_OFF7_ku1  raw/mP9-Ku-R1-07_S75_L001_R1_001.fastq  raw/mP9-Ku-R1-07_S75_L001_R2_001.fastq | tee -a mP9_nC_ku1_flash-stats.txt
+flash -M 300 -o merged/mP9_nC_ON_ku1  raw/mP9-Ku-R1-ON_S67_L001_R1_001.fastq  raw/mP9-Ku-R1-ON_S67_L001_R2_001.fastq | tee -a mP9_nC_ku1_flash-stats.txt
+
+flash -M 300 -o merged/mP9_nC_OFF0_ct1  raw/mP9-nD-R1-00_S59_L001_R1_001.fastq  raw/mP9-nD-R1-00_S59_L001_R2_001.fastq | tee mP9_nC_ct1_flash-stats.txt
+flash -M 300 -o merged/mP9_nC_OFF1_ct1  raw/mP9-nD-R1-01_S60_L001_R1_001.fastq  raw/mP9-nD-R1-01_S60_L001_R2_001.fastq | tee -a mP9_nC_ct1_flash-stats.txt
+flash -M 300 -o merged/mP9_nC_OFF2_ct1  raw/mP9-nD-R1-02_S61_L001_R1_001.fastq  raw/mP9-nD-R1-02_S61_L001_R2_001.fastq | tee -a mP9_nC_ct1_flash-stats.txt
+flash -M 300 -o merged/mP9_nC_OFF3_ct1  raw/mP9-nD-R1-03_S62_L001_R1_001.fastq  raw/mP9-nD-R1-03_S62_L001_R2_001.fastq | tee -a mP9_nC_ct1_flash-stats.txt
+flash -M 300 -o merged/mP9_nC_OFF4_ct1  raw/mP9-nD-R1-04_S63_L001_R1_001.fastq  raw/mP9-nD-R1-04_S63_L001_R2_001.fastq | tee -a mP9_nC_ct1_flash-stats.txt
+flash -M 300 -o merged/mP9_nC_OFF5_ct1  raw/mP9-nD-R1-05_S64_L001_R1_001.fastq  raw/mP9-nD-R1-05_S64_L001_R2_001.fastq | tee -a mP9_nC_ct1_flash-stats.txt
+flash -M 300 -o merged/mP9_nC_OFF6_ct1  raw/mP9-nD-R1-06_S65_L001_R1_001.fastq  raw/mP9-nD-R1-06_S65_L001_R2_001.fastq | tee -a mP9_nC_ct1_flash-stats.txt
+flash -M 300 -o merged/mP9_nC_OFF7_ct1  raw/mP9-nD-R1-07_S66_L001_R1_001.fastq  raw/mP9-nD-R1-07_S66_L001_R2_001.fastq | tee -a mP9_nC_ct1_flash-stats.txt
+flash -M 300 -o merged/mP9_nC_ON_ct1  raw/mP9-nD-R1-ON_S58_L001_R1_001.fastq  raw/mP9-nD-R1-ON_S58_L001_R2_001.fastq | tee -a mP9_nC_ct1_flash-stats.txt
