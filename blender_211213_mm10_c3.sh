@@ -22,64 +22,64 @@ mice_P9_KU_r1="/mnt/z/rzou4/NGS_data/4_damage/211213_Dseq+/A10_mPCSK9_KU24h_r1_s
 mice_P9_nD_m="/mnt/z/rzou4/NGS_data/4_damage/211213_Dseq+/mPCSK9_nD24h_merged.bam"
 mice_P9_KU_m="/mnt/z/rzou4/NGS_data/4_damage/211213_Dseq+/mPCSK9_KU24h_merged.bam"
 P9_gRNA="AGCAGCAGCGGCGGCAACAG"
-mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_nD_r0_c3
-mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_nD_r1_c3
-mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_nD_r2_c3
-mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_nD_r3_c3
-mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_nD_r4_c3
-mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_KU_r0_c3
-mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_KU_r1_c3
-mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_KU_r2_c3
-mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_KU_r3_c3
-mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_KU_r4_c3
-mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_nD_merged_c3
-mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_KU_merged_c3
+mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_nD_r0_c3
+mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_nD_r1_c3
+mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_nD_r2_c3
+mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_nD_r3_c3
+mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_nD_r4_c3
+mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_KU_r0_c3
+mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_KU_r1_c3
+mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_KU_r2_c3
+mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_KU_r3_c3
+mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_KU_r4_c3
+mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_nD_merged_c3
+mkdir -p /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_KU_merged_c3
 
 # Mouse PCSK9 replicate 0 (no drug)
 sh run_blender.sh $mm10_bowtie2 $mice_P9_nD_r0 $mice_ctrl $P9_gRNA \
-   /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_nD_r0_c3 "-c=3" \
+   /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_nD_r0_c3 "-c=3" \
 & \
 # Mouse PCSK9 replicate 0 (w/ KU-60648)
 sh run_blender.sh $mm10_bowtie2 $mice_P9_KU_r0 $mice_ctrl $P9_gRNA \
-   /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_KU_r0_c3 "-c=3" \
+   /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_KU_r0_c3 "-c=3" \
 & \
 # Mouse PCSK9 replicate 1 (no drug)
 sh run_blender.sh $mm10_bowtie2 $mice_P9_nD_r1 $mice_ctrl $P9_gRNA \
-   /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_nD_r1_c3 "-c=3" \
+   /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_nD_r1_c3 "-c=3" \
 & \
 # Mouse PCSK9 replicate 1 (w/ KU-60648)
 sh run_blender.sh $mm10_bowtie2 $mice_P9_KU_r1 $mice_ctrl $P9_gRNA \
-   /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_KU_r1_c3 "-c=3" \
+   /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_KU_r1_c3 "-c=3" \
 & \
 # Mouse PCSK9 replicate 2 (no drug)
 sh run_blender.sh $mm10_bowtie2 $mice_P9_nD_r2 $mice_ctrl $P9_gRNA \
-  /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_nD_r2_c3 "-c=3" \
+  /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_nD_r2_c3 "-c=3" \
 & \
 # Mouse PCSK9 replicate 2 (w/ KU-60648)
 sh run_blender.sh $mm10_bowtie2 $mice_P9_KU_r2 $mice_ctrl $P9_gRNA \
-  /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_KU_r2_c3 "-c=3"
+  /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_KU_r2_c3 "-c=3"
 
 
 # Mouse PCSK9 replicate 3 (no drug)
 sh run_blender.sh $mm10_bowtie2 $mice_P9_nD_r3 $mice_ctrl $P9_gRNA \
-  /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_nD_r3_c3 "-c=3" \
+  /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_nD_r3_c3 "-c=3" \
 & \
 # Mouse PCSK9 replicate 3 (w/ KU-60648)
 sh run_blender.sh $mm10_bowtie2 $mice_P9_KU_r3 $mice_ctrl $P9_gRNA \
-  /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_KU_r3_c3 "-c=3" \
+  /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_KU_r3_c3 "-c=3" \
 & \
 # Mouse PCSK9 replicate 4 (no drug)
 sh run_blender.sh $mm10_bowtie2 $mice_P9_nD_r4 $mice_ctrl $P9_gRNA \
-  /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_nD_r4_c3 "-c=3" \
+  /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_nD_r4_c3 "-c=3" \
 & \
 # Mouse PCSK9 replicate 4 (w/ KU-60648)
 sh run_blender.sh $mm10_bowtie2 $mice_P9_KU_r4 $mice_ctrl $P9_gRNA \
-  /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_KU_r4_c3 "-c=3"
+  /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_KU_r4_c3 "-c=3"
 
 
 # Mouse PCSK9 merged (w/ or without KU-60648)
 sh run_blender.sh $mm10_bowtie2 $mice_P9_nD_m $mice_ctrl $P9_gRNA \
-    /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_nD_merged_c3 "-c=3" \
+    /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_nD_merged_c3 "-c=3" \
 & \
 sh run_blender.sh $mm10_bowtie2 $mice_P9_KU_m $mice_ctrl $P9_gRNA \
-    /mnt/z/rzou4/NGS_data/4_damage/Dseq+/mouse_PCSK9_KU_merged_c3 "-c=3"
+    /mnt/z/rzou4/NGS_data/4_damage/Dseq+/211213_mm10_c3/mouse_PCSK9_KU_merged_c3 "-c=3"
