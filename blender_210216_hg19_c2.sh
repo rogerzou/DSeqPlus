@@ -45,9 +45,8 @@ sh run_blender.sh $hg19_bowtie2 $HEK_Vs3_KU $HEK_ctrl $Vs3_gRNA \
 & \
 # HEK293T VEGFAs3 replicate 1 (w/ NU-7026)
 sh run_blender.sh $hg19_bowtie2 $HEK_Vs3_NU $HEK_ctrl $Vs3_gRNA \
-    /mnt/z/rzou4/NGS_data/4_damage/Dseq+/210216_hg19_c2/HEK_Vs3_NU_r1_c2 "-c=2"
-
-
+    /mnt/z/rzou4/NGS_data/4_damage/Dseq+/210216_hg19_c2/HEK_Vs3_NU_r1_c2 "-c=2" \
+& \
 # HEK293T HEKs4 replicate 1 (no drug) 04h
 sh run_blender.sh $hg19_bowtie2 $HEK_Hs4_nD_04h $HEK_ctrl $Hs4_gRNA \
     /mnt/z/rzou4/NGS_data/4_damage/Dseq+/210216_hg19_c2/HEK_Hs4_nD04_r1_c2 "-c=2" \
@@ -71,9 +70,8 @@ sh run_blender.sh $hg19_bowtie2 $HEK_Hs4_KU $HEK_ctrl $Hs4_gRNA \
 & \
 # HEK293T HEKs4 replicate 1 (w/ KU-60648) 24h
 sh run_blender.sh $hg19_bowtie2 $HEK_Hs4_KU_24h $HEK_ctrl $Hs4_gRNA \
-    /mnt/z/rzou4/NGS_data/4_damage/Dseq+/210216_hg19_c2/HEK_Hs4_KU24_r1_c2 "-c=2"
-
-
+    /mnt/z/rzou4/NGS_data/4_damage/Dseq+/210216_hg19_c2/HEK_Hs4_KU24_r1_c2 "-c=2" \
+& \
 # HEK293T VEGFAs2 replicate 1 (no drug)
 sh run_blender.sh $hg19_bowtie2 $HEK_Vs2_nD $HEK_ctrl $Vs2_gRNA \
     /mnt/z/rzou4/NGS_data/4_damage/Dseq+/210216_hg19_c2/HEK_Vs2_nD_r1_c2 "-c=2" \
