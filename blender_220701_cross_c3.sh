@@ -17,12 +17,12 @@ K562_WT_nD_r1="/mnt/z/rzou4/NGS_data/4_damage/210301_Dseq+/A20_hg19_final.bam"
 K562_WT_KU_r1="/mnt/z/rzou4/NGS_data/4_damage/220701_Dseq+/K562_WT_KU_r1_hg19_merged.bam"
 K562_WT_nD_r2="/mnt/z/rzou4/NGS_data/4_damage/220701_Dseq+/K562_WT_nD_r2_hg19_merged.bam"
 K562_WT_KU_r2="/mnt/z/rzou4/NGS_data/4_damage/220701_Dseq+/K562_WT_KU_r2_hg19_merged.bam"
-mice_WT_nD_r1="/mnt/z/rzou4/NGS_data/4_damage/220701_Dseq+/mice_WT_nD_r1_hg19_merged.bam"
-mice_WT_KU_r1="/mnt/z/rzou4/NGS_data/4_damage/220701_Dseq+/mice_WT_KU_r1_hg19_merged.bam"
-mice_WT_nD_r2="/mnt/z/rzou4/NGS_data/4_damage/220701_Dseq+/mice_WT_nD_r2_hg19_merged.bam"
-mice_WT_KU_r2="/mnt/z/rzou4/NGS_data/4_damage/220701_Dseq+/mice_WT_KU_r2_hg19_merged.bam"
-mice_WT_nD_r3="/mnt/z/rzou4/NGS_data/4_damage/220701_Dseq+/mice_WT_nD_r3_hg19_merged.bam"
-mice_WT_KU_r3="/mnt/z/rzou4/NGS_data/4_damage/220701_Dseq+/mice_WT_KU_r3_hg19_merged.bam"
+mice_WT_nD_r1="/mnt/z/rzou4/NGS_data/4_damage/220701_Dseq+/mice_WT_nD_r1_mm10_merged.bam"
+mice_WT_KU_r1="/mnt/z/rzou4/NGS_data/4_damage/220701_Dseq+/mice_WT_KU_r1_mm10_merged.bam"
+mice_WT_nD_r2="/mnt/z/rzou4/NGS_data/4_damage/220701_Dseq+/mice_WT_nD_r2_mm10_merged.bam"
+mice_WT_KU_r2="/mnt/z/rzou4/NGS_data/4_damage/220701_Dseq+/mice_WT_KU_r2_mm10_merged.bam"
+mice_WT_nD_r3="/mnt/z/rzou4/NGS_data/4_damage/220701_Dseq+/mice_WT_nD_r3_mm10_merged.bam"
+mice_WT_KU_r3="/mnt/z/rzou4/NGS_data/4_damage/220701_Dseq+/mice_WT_KU_r3_mm10_merged.bam"
 Fs2_gRNA="GCTGCAGAAGGGATTCCATG"
 Hs4_gRNA="GGCACTGCGGCTGGAGGTGG"
 Vs2_gRNA="GACCCCCTCCACCCCGCCTC"
@@ -166,14 +166,14 @@ sh run_blender.sh $hg19_bowtie2 $K562_WT_KU_r1 $K562_WT_nD_r1 $Vs3_gRNA \
 ## mice ##
 ##########
 
-# mice WT replicate 1 (w/ no drug) - Fs2
+# mice WT replicate 1 (w/ no drug) - mP9
 sh run_blender.sh $mm10_bowtie2 $mice_WT_nD_r1 $mice_WT_nD_r2 $mP9_gRNA \
   /mnt/z/rzou4/NGS_data/4_damage/Dseq+/220701_cross_c3/mice_WT-mP9_nD-nD_c3 "-c=3" \
 & \
-# mice WT replicate 1 (w/ KU-60648) - Fs2
+# mice WT replicate 1 (w/ KU-60648) - mP9
 sh run_blender.sh $mm10_bowtie2 $mice_WT_KU_r1 $mice_WT_KU_r2 $mP9_gRNA \
   /mnt/z/rzou4/NGS_data/4_damage/Dseq+/220701_cross_c3/mice_WT-mP9_KU-KU_c3 "-c=3" \
 & \
-# mice WT replicate 1 (w/ KU-60648) - Fs2
+# mice WT replicate 1 (w/ KU-60648) - mP9
 sh run_blender.sh $mm10_bowtie2 $mice_WT_KU_r1 $mice_WT_nD_r1 $mP9_gRNA \
   /mnt/z/rzou4/NGS_data/4_damage/Dseq+/220701_cross_c3/mice_WT-mP9_KU-nD_c3 "-c=3"

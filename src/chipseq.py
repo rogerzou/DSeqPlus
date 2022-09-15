@@ -283,7 +283,7 @@ def blender_gen(blender, span_r, genome, guide):
         ( region string, cut site, sense/antisense, PAM, discovered protospacer,
         # mismatches, non-mismatched protospacer, DISCO score )
     """
-    b_out = np.loadtxt(blender, dtype=object, skiprows=1, delimiter='\t')
+    b_out = np.loadtxt(blender, dtype=object, skiprows=1, delimiter='\t', ndmin=2)
     numpeaks = b_out.shape[0]
     hgsize = get_genome_dict(genome[0])
     for i in range(numpeaks):
@@ -615,7 +615,7 @@ def read_counts(generator, filein, fileout=None):
 
 
 def save_gen(gen, fileout):
-    """
+    """ Save generator in the same format as BLENDER output
     :param gen: generator that outputs target sites in the following tuple format:
                 ( span_rs   =   region string in "chr1:100-200" format, centered at cut site
                   cut_i     =   cut site                 (int)
@@ -625,13 +625,58 @@ def save_gen(gen, fileout):
                   mis_i     =   # mismatches             (int)
                   guide     =   intended target sequence (str)
                   val_i     =   enrichment value         (int)
-    :param fileout: path to CSV output, extension omitted.
+    :param fileout: path to txt output, extension omitted.
     """
     outa = []
-    for g in gen:
-        outa.append(g)
-    head = 'region string, cut, sense, PAM, actual sequence, # mismatches, intended sequence, val'
-    np.savetxt(fileout + "_savegen.csv", np.asarray(outa), fmt='%s', delimiter=',', header=head)
+    [outa.append(g) for g in gen]
+    head = 'Chr: Start - End\tCutsite\tDiscoscore\tCutsite Ends\tStrand\tPAM\tGuide sequence\tMismatches'
+    out_array = np.asarray(outa)
+    out_array = out_array[:, [0, 1, 7, 7, 2, 3, 4, 5]]
+    antisense = out_array[:, 4] == '-'
+    out_array[antisense, 4] = "antisense"
+    out_array[~antisense, 4] = "sense"
+    out_array[antisense, 2] = out_array[antisense, 2].astype(int) - 1
+    np.savetxt(fileout + ".txt", out_array, fmt='%s', delimiter='\t', header=head)
+
+
+def gen_rmdup(gen1, dist):
+    """ Outputs generator for set of target sites from gen1, with duplicates removed.
+    Duplicates defined as two target sites in the same chromosome, within 'dist' bp apart, same # mismatches
+    and target sequence. Remove the duplicate site with lower enrichment value.
+    :param gen1: generator that outputs target sites in the following tuple format:
+                ( span_rs   =   region string in "chr1:100-200" format, centered at cut site
+                  cut_i     =   cut site                 (int)
+                  sen_i     =   sense/antisense          (+/- str)
+                  pam_i     =   PAM                      (str)
+                  gui_i     =   genomic target sequence  (str)
+                  mis_i     =   # mismatches             (int)
+                  guide     =   intended target sequence (str)
+                  val_i     =   enrichment value         (int)
+    :param dist: max distance to be considered a duplicate by distance criteria.
+    :return: generator with duplicates removed.
+    """
+    gen_list = list(gen1)
+    stop_while = False
+    while not stop_while:
+        stop_if = False
+        for ind_i in range(len(gen_list) - 1):
+            gen_1, gen_2 = gen_list[ind_i], gen_list[ind_i + 1]
+            chr_1, chr_2 = re.split('[:-]', gen_1[0])[0], re.split('[:-]', gen_2[0])[0]
+            cut_1, cut_2 = gen_1[1], gen_2[1]
+            val_1, val_2 = gen_1[-1], gen_2[-1]
+            mis_1, mis_2 = gen_1[-3], gen_2[-3]
+            gui_1, gui_2 = gen_1[-2], gen_2[-2]
+            if chr_1 == chr_2:  # if chr are the same and distance is close...remove site with lesser value
+                if mis_1 == mis_2 and gui_1 == gui_2 and abs(cut_1 - cut_2) < dist:
+                    gen_list.pop(ind_i + 1) if val_1 > val_2 else gen_list.pop(ind_i)
+                    stop_if = True
+                    print("gen_rmdup(): Removed %s" % gen_1[0])
+            if stop_if:
+                break
+        if not stop_if:
+            stop_while = True
+    for gen_i in gen_list:
+        yield gen_i
 
 
 def gen_subtr_exact(gen1, gen2):

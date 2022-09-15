@@ -354,89 +354,89 @@ amp.getIndels(ampngs5 + "merged/Fs2_OFF12_ku3.extendedFrags.fastq", REF,
               gRNA_Fs2_OFF12, ana_4 + "Fs2_OFF12_ku3.txt", stats=True)
 
 
-""" ############################################################################################ """
-""" Amplicon NGS to check indels in primary T-cells cells without DNA-PKi, with/without Cas9 (3 replicates). """
-gg.generate_ref(c.blender_gen(mm10_mP9_KU_r3_c3_txt, 2000, mm10, gRNA_mP9[0]),
-                ana_4 + "REF_mm10_mP9_KU_r3_c3", mm10[0], genome_savepath)
-REF = SeqIO.to_dict(SeqIO.parse(ana_4 + "REF_mm10_mP9_KU_r3_c3.fa", "fasta"))
-
-amp.getIndels(ampngs5 + "merged/mP9_C9_ON_ct1.extendedFrags.fastq", REF,
-              gRNA_mP9, ana_4 + "mP9_C9_ON_ct1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_C9_ON_ku1.extendedFrags.fastq", REF,
-              gRNA_mP9, ana_4 + "mP9_C9_ON_ku1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_nC_ON_ct1.extendedFrags.fastq", REF,
-              gRNA_mP9, ana_4 + "mP9_nC_ON_ct1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_nC_ON_ku1.extendedFrags.fastq", REF,
-              gRNA_mP9, ana_4 + "mP9_nC_ON_ku1.txt", stats=True)
-
-amp.getIndels(ampngs5 + "merged/mP9_C9_OFF0_ct1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF0, ana_4 + "mP9_C9_OFF0_ct1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_C9_OFF0_ku1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF0, ana_4 + "mP9_C9_OFF0_ku1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_nC_OFF0_ct1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF0, ana_4 + "mP9_nC_OFF0_ct1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_nC_OFF0_ku1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF0, ana_4 + "mP9_nC_OFF0_ku1.txt", stats=True)
-
-amp.getIndels(ampngs5 + "merged/mP9_C9_OFF1_ct1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF1, ana_4 + "mP9_C9_OFF1_ct1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_C9_OFF1_ku1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF1, ana_4 + "mP9_C9_OFF1_ku1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_nC_OFF1_ct1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF1, ana_4 + "mP9_nC_OFF1_ct1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_nC_OFF1_ku1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF1, ana_4 + "mP9_nC_OFF1_ku1.txt", stats=True)
-
-amp.getIndels(ampngs5 + "merged/mP9_C9_OFF2_ct1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF2, ana_4 + "mP9_C9_OFF2_ct1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_C9_OFF2_ku1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF2, ana_4 + "mP9_C9_OFF2_ku1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_nC_OFF2_ct1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF2, ana_4 + "mP9_nC_OFF2_ct1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_nC_OFF2_ku1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF2, ana_4 + "mP9_nC_OFF2_ku1.txt", stats=True)
-
-amp.getIndels(ampngs5 + "merged/mP9_C9_OFF3_ct1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF3, ana_4 + "mP9_C9_OFF3_ct1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_C9_OFF3_ku1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF3, ana_4 + "mP9_C9_OFF3_ku1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_nC_OFF3_ct1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF3, ana_4 + "mP9_nC_OFF3_ct1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_nC_OFF3_ku1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF3, ana_4 + "mP9_nC_OFF3_ku1.txt", stats=True)
-
-amp.getIndels(ampngs5 + "merged/mP9_C9_OFF4_ct1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF4, ana_4 + "mP9_C9_OFF4_ct1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_C9_OFF4_ku1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF4, ana_4 + "mP9_C9_OFF4_ku1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_nC_OFF4_ct1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF4, ana_4 + "mP9_nC_OFF4_ct1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_nC_OFF4_ku1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF4, ana_4 + "mP9_nC_OFF4_ku1.txt", stats=True)
-
-amp.getIndels(ampngs5 + "merged/mP9_C9_OFF5_ct1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF5, ana_4 + "mP9_C9_OFF5_ct1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_C9_OFF5_ku1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF5, ana_4 + "mP9_C9_OFF5_ku1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_nC_OFF5_ct1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF5, ana_4 + "mP9_nC_OFF5_ct1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_nC_OFF5_ku1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF5, ana_4 + "mP9_nC_OFF5_ku1.txt", stats=True)
-
-amp.getIndels(ampngs5 + "merged/mP9_C9_OFF6_ct1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF6, ana_4 + "mP9_C9_OFF6_ct1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_C9_OFF6_ku1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF6, ana_4 + "mP9_C9_OFF6_ku1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_nC_OFF6_ct1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF6, ana_4 + "mP9_nC_OFF6_ct1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_nC_OFF6_ku1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF6, ana_4 + "mP9_nC_OFF6_ku1.txt", stats=True)
-
-amp.getIndels(ampngs5 + "merged/mP9_C9_OFF7_ct1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF7, ana_4 + "mP9_C9_OFF7_ct1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_C9_OFF7_ku1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF7, ana_4 + "mP9_C9_OFF7_ku1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_nC_OFF7_ct1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF7, ana_4 + "mP9_nC_OFF7_ct1.txt", stats=True)
-amp.getIndels(ampngs5 + "merged/mP9_nC_OFF7_ku1.extendedFrags.fastq", REF,
-              gRNA_mP9_OFF7, ana_4 + "mP9_nC_OFF7_ku1.txt", stats=True)
+# """ ############################################################################################ """
+# """ Amplicon NGS to check indels in mice, with/without Cas9 (3 replicates). """
+# gg.generate_ref(c.blender_gen(mm10_mP9_KU_r3_c3_txt, 2000, mm10, gRNA_mP9[0]),
+#                 ana_4 + "REF_mm10_mP9_KU_r3_c3", mm10[0], genome_savepath)
+# REF = SeqIO.to_dict(SeqIO.parse(ana_4 + "REF_mm10_mP9_KU_r3_c3.fa", "fasta"))
+#
+# amp.getIndels(ampngs5 + "merged/mP9_C9_ON_ct1.extendedFrags.fastq", REF,
+#               gRNA_mP9, ana_4 + "mP9_C9_ON_ct1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_C9_ON_ku1.extendedFrags.fastq", REF,
+#               gRNA_mP9, ana_4 + "mP9_C9_ON_ku1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_nC_ON_ct1.extendedFrags.fastq", REF,
+#               gRNA_mP9, ana_4 + "mP9_nC_ON_ct1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_nC_ON_ku1.extendedFrags.fastq", REF,
+#               gRNA_mP9, ana_4 + "mP9_nC_ON_ku1.txt", stats=True)
+#
+# amp.getIndels(ampngs5 + "merged/mP9_C9_OFF0_ct1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF0, ana_4 + "mP9_C9_OFF0_ct1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_C9_OFF0_ku1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF0, ana_4 + "mP9_C9_OFF0_ku1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_nC_OFF0_ct1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF0, ana_4 + "mP9_nC_OFF0_ct1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_nC_OFF0_ku1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF0, ana_4 + "mP9_nC_OFF0_ku1.txt", stats=True)
+#
+# amp.getIndels(ampngs5 + "merged/mP9_C9_OFF1_ct1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF1, ana_4 + "mP9_C9_OFF1_ct1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_C9_OFF1_ku1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF1, ana_4 + "mP9_C9_OFF1_ku1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_nC_OFF1_ct1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF1, ana_4 + "mP9_nC_OFF1_ct1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_nC_OFF1_ku1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF1, ana_4 + "mP9_nC_OFF1_ku1.txt", stats=True)
+#
+# amp.getIndels(ampngs5 + "merged/mP9_C9_OFF2_ct1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF2, ana_4 + "mP9_C9_OFF2_ct1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_C9_OFF2_ku1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF2, ana_4 + "mP9_C9_OFF2_ku1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_nC_OFF2_ct1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF2, ana_4 + "mP9_nC_OFF2_ct1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_nC_OFF2_ku1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF2, ana_4 + "mP9_nC_OFF2_ku1.txt", stats=True)
+#
+# amp.getIndels(ampngs5 + "merged/mP9_C9_OFF3_ct1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF3, ana_4 + "mP9_C9_OFF3_ct1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_C9_OFF3_ku1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF3, ana_4 + "mP9_C9_OFF3_ku1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_nC_OFF3_ct1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF3, ana_4 + "mP9_nC_OFF3_ct1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_nC_OFF3_ku1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF3, ana_4 + "mP9_nC_OFF3_ku1.txt", stats=True)
+#
+# amp.getIndels(ampngs5 + "merged/mP9_C9_OFF4_ct1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF4, ana_4 + "mP9_C9_OFF4_ct1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_C9_OFF4_ku1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF4, ana_4 + "mP9_C9_OFF4_ku1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_nC_OFF4_ct1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF4, ana_4 + "mP9_nC_OFF4_ct1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_nC_OFF4_ku1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF4, ana_4 + "mP9_nC_OFF4_ku1.txt", stats=True)
+#
+# amp.getIndels(ampngs5 + "merged/mP9_C9_OFF5_ct1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF5, ana_4 + "mP9_C9_OFF5_ct1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_C9_OFF5_ku1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF5, ana_4 + "mP9_C9_OFF5_ku1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_nC_OFF5_ct1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF5, ana_4 + "mP9_nC_OFF5_ct1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_nC_OFF5_ku1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF5, ana_4 + "mP9_nC_OFF5_ku1.txt", stats=True)
+#
+# amp.getIndels(ampngs5 + "merged/mP9_C9_OFF6_ct1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF6, ana_4 + "mP9_C9_OFF6_ct1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_C9_OFF6_ku1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF6, ana_4 + "mP9_C9_OFF6_ku1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_nC_OFF6_ct1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF6, ana_4 + "mP9_nC_OFF6_ct1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_nC_OFF6_ku1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF6, ana_4 + "mP9_nC_OFF6_ku1.txt", stats=True)
+#
+# amp.getIndels(ampngs5 + "merged/mP9_C9_OFF7_ct1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF7, ana_4 + "mP9_C9_OFF7_ct1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_C9_OFF7_ku1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF7, ana_4 + "mP9_C9_OFF7_ku1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_nC_OFF7_ct1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF7, ana_4 + "mP9_nC_OFF7_ct1.txt", stats=True)
+# amp.getIndels(ampngs5 + "merged/mP9_nC_OFF7_ku1.extendedFrags.fastq", REF,
+#               gRNA_mP9_OFF7, ana_4 + "mP9_nC_OFF7_ku1.txt", stats=True)

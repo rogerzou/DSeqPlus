@@ -1,6 +1,6 @@
 """
 Script for:
-(1)
+(1) Calculating MRE11 enrichment at all putative off-target sites
 """
 import src.chipseq as c
 import sys
@@ -78,8 +78,8 @@ gRNA_Fs2 = "GCTGCAGAAGGGATTCCATG"
 gRNA_Vs3 = "GGTGAGTGAGTGTGTGCGTG"
 gRNA_Hs4 = "GGCACTGCGGCTGGAGGTGG"
 gRNA_mP9 = "AGCAGCAGCGGCGGCAACAG"
-gRNA_Cas9 ="AGAGTCTCTCAGCTGGTACA"
-gRNA_Cpf1 ="GAGTCTCTCAGCTGGTACAC"
+gRNA_Cas9 = "AGAGTCTCTCAGCTGGTACA"
+gRNA_Cpf1 = "GAGTCTCTCAGCTGGTACAC"
 
 """ Set analysis path """
 ana = datadir + "Dseq_out/"
