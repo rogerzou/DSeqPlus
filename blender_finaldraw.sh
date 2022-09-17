@@ -19,5 +19,5 @@ sh draw_blender.sh $Vs2_gRNA "${bdir}/iPSC_Vs2_nD_final.txt" "${bdir}/iPSC_Vs2_n
 sh draw_blender.sh $Vs2_gRNA "${bdir}/iPSC_Vs2_KU_final.txt" "${bdir}/iPSC_Vs2_KU_final"
 sh draw_blender.sh $Vs2_gRNA "${bdir}/K562_Vs2_nD_final.txt" "${bdir}/K562_Vs2_nD_final"
 sh draw_blender.sh $Vs2_gRNA "${bdir}/K562_Vs2_KU_final.txt" "${bdir}/K562_Vs2_KU_final"
-sh draw_blender.sh $P9_gRNA "${bdir}/mice_mP9_KU_final_merge_rmdup.txt" "${bdir}/mice_mP9_KU_final_merge_rmdup"
+sh draw_blender.sh $P9_gRNA "${bdir}/mice_mP9_nD_final_merge_rmdup.txt" "${bdir}/mice_mP9_nD_final_merge_rmdup"
 sh draw_blender.sh $P9_gRNA "${bdir}/mice_mP9_KU_final_merge_rmdup.txt" "${bdir}/mice_mP9_KU_final_merge_rmdup"
