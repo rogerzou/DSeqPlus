@@ -33,6 +33,8 @@ HEK_Hs4_nD24_r1_c2_txt = datadir + "Dseq+/210216_hg19_c2/HEK_Hs4_nD24_r1_c2/filt
 HEK_Hs4_KU24_r1_c2_txt = datadir + "Dseq+/210216_hg19_c2/HEK_Hs4_KU24_r1_c2/filtered_blender_hits.txt"
 HEK_Vs3_nD_r1_c2_txt = datadir + "Dseq+/210216_hg19_c2/HEK_Vs3_nD_r1_c2/filtered_blender_hits.txt"
 HEK_Vs3_KU_r1_c2_txt = datadir + "Dseq+/210216_hg19_c2/HEK_Vs3_KU_r1_c2/filtered_blender_hits.txt"
+HEK_Vs2_nD_r1_c2_txt = datadir + "Dseq+/210216_hg19_c2/HEK_Vs2_nD_r1_c2/filtered_blender_hits.txt"
+HEK_Vs2_KU_r1_c2_txt = datadir + "Dseq+/210216_hg19_c2/HEK_Vs2_KU_r1_c2/filtered_blender_hits.txt"
 iPSC_Vs2_nD_r1_c2_txt = datadir + "Dseq+/210301_hg19_c2/iPSC_Vs2_nD_r1_c2/filtered_blender_hits.txt"
 iPSC_Vs2_KU_r1_c2_txt = datadir + "Dseq+/210301_hg19_c2/iPSC_Vs2_KU_r1_c2/filtered_blender_hits.txt"
 HEK_Hs4_Kn_c3_txt = datadir + "Dseq+/220701_cross_c3/HEK_WT-Hs4_KU-nD_c3/filtered_blender_hits.txt"
@@ -113,6 +115,14 @@ c.save_gen(gen, ana_3 + "HEK_Vs3_nD_final")
 gen = c.gen_subtr_exact(c.blender_gen(HEK_Vs3_KU_r1_c2_txt, 2000, hg19, gRNA_Vs3),
                         c.blender_gen(HEK_Vs3_Kn_c3_txt, 2000, hg19, gRNA_Vs3))
 c.save_gen(gen, ana_3 + "HEK_Vs3_KU_final")
+
+print("HEK VEGFAs2 remove false positives")
+gen = c.gen_subtr_exact(c.blender_gen(HEK_Vs2_nD_r1_c2_txt, 2000, hg19, gRNA_Vs2),
+                        c.blender_gen(HEK_Vs2_nn_c3_txt, 2000, hg19, gRNA_Vs2))
+c.save_gen(gen, ana_3 + "HEK_Vs2_nD_final")
+gen = c.gen_subtr_exact(c.blender_gen(HEK_Vs2_KU_r1_c2_txt, 2000, hg19, gRNA_Vs2),
+                        c.blender_gen(HEK_Vs2_Kn_c3_txt, 2000, hg19, gRNA_Vs2))
+c.save_gen(gen, ana_3 + "HEK_Vs2_KU_final")
 
 print("iPSC VEGFAs2 remove false positives")
 gen = c.gen_subtr_exact(c.blender_gen(iPSC_Vs2_nD_r1_c2_txt, 2000, hg19, gRNA_Vs2),
@@ -235,26 +245,7 @@ b5 = [g[0] for g in c.gen_subtr_approx(c.nbt3117_gen(gRNA_Vs2),
 
 
 """ ############################################################################################ """
-""" aav9023 is Wienert/Wyman 2020
-    Determine overlap between DISCOVER-Seq+ and DISCOVER-Seq in mice """
-
-print("Mouse PCSK9 rep3 nD comparison to KU")
-c1 = [g[0] for g in c.gen_subtr_exact(c.blender_gen(ana_3 + "mice_mP9_nD_final_r3.txt", 2000, mm10, gRNA_mP9),
-                                      c.blender_gen(ana_3 + "mice_mP9_KU_final_r3.txt", 2000, mm10, gRNA_mP9))]
-c2 = [g[0] for g in c.gen_subtr_exact(c.blender_gen(ana_3 + "mice_mP9_KU_final_r3.txt", 2000, mm10, gRNA_mP9),
-                                      c.blender_gen(ana_3 + "mice_mP9_nD_final_r3.txt", 2000, mm10, gRNA_mP9))]
-
-print("Mouse PCSK9 rep3 nD comparison to individual Wienert/Wyman et al.")
-c3 = [g[0] for g in c.gen_subtr_approx(c.blender_gen(ana_3 + "mice_mP9_nD_final_r3.txt", 2000, mm10, gRNA_mP9),
-                                       c.aav9023_gen(gRNA_mP9, choice=1))]
-c4 = [g[0] for g in c.gen_subtr_approx(c.aav9023_gen(gRNA_mP9, choice=1),
-                                       c.blender_gen(ana_3 + "mice_mP9_nD_final_r3.txt", 2000, mm10, gRNA_mP9))]
-
-print("Mouse PCSK9 rep3 KU comparison to individual Wienert/Wyman et al.")
-c5 = [g[0] for g in c.gen_subtr_approx(c.blender_gen(ana_3 + "mice_mP9_KU_final_r3.txt", 2000, mm10, gRNA_mP9),
-                                       c.aav9023_gen(gRNA_mP9, choice=1))]
-c6 = [g[0] for g in c.gen_subtr_approx(c.aav9023_gen(gRNA_mP9, choice=1),
-                                       c.blender_gen(ana_3 + "mice_mP9_KU_final_r3.txt", 2000, mm10, gRNA_mP9))]
+""" Determine overlap between DISCOVER-Seq+ and DISCOVER-Seq in mice. aav9023 is Wienert/Wyman 2020. """
 
 print("Mouse PCSK9 individual Wienert/Wyman SUBTRACT rep3 KU UNION rep3 nD")
 d1 = [g[0] for g in c.gen_subtr_approx(c.aav9023_gen(gRNA_mP9, choice=1),
@@ -277,3 +268,58 @@ d4 = [g[0] for g in c.gen_inter_approx(c.blender_gen(ana_3 + "mice_mP9_nD_final_
                                        c.gen_inter_approx(c.aav9023_gen(gRNA_mP9, choice=1),
                                                           c.blender_gen(ana_3 + "mice_mP9_KU_final_r3.txt",
                                                                         2000, mm10, gRNA_mP9)))]
+
+
+""" ############################################################################################ """
+""" Determine overlap between VEGFA site 2 target sites in different cell types (K562 vs HEK vs iPSC). """
+
+print("KU-60648 | K562 SUBTRACT HEK UNION iPSC")
+d1 = [g[0] for g in c.gen_subtr_approx(c.blender_gen(ana_3 + "K562_Vs2_KU_final.txt", 2000, hg19, gRNA_Vs2),
+                                       c.gen_union_approx(c.blender_gen(ana_3 + "HEK_Vs2_KU_final.txt",
+                                                                        2000, hg19, gRNA_Vs2),
+                                                          c.blender_gen(ana_3 + "iPSC_Vs2_KU_final.txt",
+                                                                        2000, hg19, gRNA_Vs2)))]
+print("KU-60648 | HEK SUBTRACT K562 UNION iPSC")
+d2 = [g[0] for g in c.gen_subtr_approx(c.blender_gen(ana_3 + "HEK_Vs2_KU_final.txt", 2000, hg19, gRNA_Vs2),
+                                       c.gen_union_approx(c.blender_gen(ana_3 + "K562_Vs2_KU_final.txt",
+                                                                        2000, hg19, gRNA_Vs2),
+                                                          c.blender_gen(ana_3 + "iPSC_Vs2_KU_final.txt",
+                                                                        2000, hg19, gRNA_Vs2)))]
+print("KU-60648 | iPSC SUBTRACT K562 UNION HEK")
+d3 = [g[0] for g in c.gen_subtr_approx(c.blender_gen(ana_3 + "iPSC_Vs2_KU_final.txt", 2000, hg19, gRNA_Vs2),
+                                       c.gen_union_approx(c.blender_gen(ana_3 + "K562_Vs2_KU_final.txt",
+                                                                        2000, hg19, gRNA_Vs2),
+                                                          c.blender_gen(ana_3 + "HEK_Vs2_KU_final.txt",
+                                                                        2000, hg19, gRNA_Vs2)))]
+print("KU-60648 | iPSC INTERSECT K562 INTERSECT HEK")
+d4 = [g[0] for g in c.gen_inter_approx(c.blender_gen(ana_3 + "iPSC_Vs2_KU_final.txt", 2000, hg19, gRNA_Vs2),
+                                       c.gen_inter_approx(c.blender_gen(ana_3 + "K562_Vs2_KU_final.txt",
+                                                                        2000, hg19, gRNA_Vs2),
+                                                          c.blender_gen(ana_3 + "HEK_Vs2_KU_final.txt",
+                                                                        2000, hg19, gRNA_Vs2)))]
+
+
+print("no drug | K562 SUBTRACT HEK UNION iPSC")
+d1 = [g[0] for g in c.gen_subtr_approx(c.blender_gen(ana_3 + "K562_Vs2_nD_final.txt", 2000, hg19, gRNA_Vs2),
+                                       c.gen_union_approx(c.blender_gen(ana_3 + "HEK_Vs2_nD_final.txt",
+                                                                        2000, hg19, gRNA_Vs2),
+                                                          c.blender_gen(ana_3 + "iPSC_Vs2_nD_final.txt",
+                                                                        2000, hg19, gRNA_Vs2)))]
+print("no drug | HEK SUBTRACT K562 UNION iPSC")
+d2 = [g[0] for g in c.gen_subtr_approx(c.blender_gen(ana_3 + "HEK_Vs2_nD_final.txt", 2000, hg19, gRNA_Vs2),
+                                       c.gen_union_approx(c.blender_gen(ana_3 + "K562_Vs2_nD_final.txt",
+                                                                        2000, hg19, gRNA_Vs2),
+                                                          c.blender_gen(ana_3 + "iPSC_Vs2_nD_final.txt",
+                                                                        2000, hg19, gRNA_Vs2)))]
+print("no drug | iPSC SUBTRACT K562 UNION HEK")
+d3 = [g[0] for g in c.gen_subtr_approx(c.blender_gen(ana_3 + "iPSC_Vs2_nD_final.txt", 2000, hg19, gRNA_Vs2),
+                                       c.gen_union_approx(c.blender_gen(ana_3 + "K562_Vs2_nD_final.txt",
+                                                                        2000, hg19, gRNA_Vs2),
+                                                          c.blender_gen(ana_3 + "HEK_Vs2_nD_final.txt",
+                                                                        2000, hg19, gRNA_Vs2)))]
+print("KU-60648 | iPSC INTERSECT K562 INTERSECT HEK")
+d4 = [g[0] for g in c.gen_inter_approx(c.blender_gen(ana_3 + "iPSC_Vs2_nD_final.txt", 2000, hg19, gRNA_Vs2),
+                                       c.gen_inter_approx(c.blender_gen(ana_3 + "K562_Vs2_nD_final.txt",
+                                                                        2000, hg19, gRNA_Vs2),
+                                                          c.blender_gen(ana_3 + "HEK_Vs2_nD_final.txt",
+                                                                        2000, hg19, gRNA_Vs2)))]
